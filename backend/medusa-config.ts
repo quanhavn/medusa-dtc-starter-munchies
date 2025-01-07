@@ -15,19 +15,20 @@ export default defineConfig({
       cookieSecret: process.env.COOKIE_SECRET || "supersecret",
     },
   },
-  admin: {
-    backendUrl: "https://munchies.medusajs.app",
-    // backendUrl: "http://localhost:9000",
-  },
+  // admin: {
+  //   // backendUrl: "https://munchies.medusajs.app",
+  //   backendUrl: "http://0.0.0.0:9000",
+  // },
   modules: [
     {
       resolve: "./modules/sanity",
       options: {
         api_token: process.env.SANITY_API_TOKEN,
         project_id: process.env.SANITY_PROJECT_ID,
-        api_version: new Date().toISOString().split("T")[0],
+        api_version: "2025-01-01",
         dataset: "production",
-        studio_url: "https://munchies-tinloof.vercel.app/cms",
+        useCdn: false,
+        // studio_url: "https://munchies-tinloof.vercel.app/cms",
         type_map: {
           collection: "collection",
           category: "category",
@@ -44,11 +45,13 @@ export default defineConfig({
             resolve: "@medusajs/medusa/file-s3",
             id: "s3",
             options: {
-              authentication_method: "s3-iam-role",
-              file_url: process.env.S3_FILE_URL,
+              // authentication_method: "s3-iam-role",
+              // file_url: process.env.S3_FILE_URL,
               region: process.env.S3_REGION,
               bucket: process.env.S3_BUCKET,
-              endpoint: process.env.S3_ENDPOINT,
+              access_key_id: process.env.S3_ACCESS_KEY_ID,
+              secret_access_key: process.env.S3_SECRET_ACCESS_KEY,
+              // endpoint: process.env.S3_ENDPOINT,
             },
           },
         ],

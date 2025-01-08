@@ -1,4 +1,4 @@
-import defineSchema from "@/sanity/helpers/define-schema";
+import defineSchema from "../../helpers/define-schema";
 import {OlistIcon} from "@sanity/icons";
 
 export const faqCategory = defineSchema({

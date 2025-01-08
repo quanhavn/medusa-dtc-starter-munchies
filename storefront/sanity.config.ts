@@ -1,4 +1,4 @@
-import config from "@/config";
+import config from "./config";
 import {visionTool} from "@sanity/vision";
 import {pages} from "@tinloof/sanity-studio";
 import {defineConfig, isDev} from "sanity";

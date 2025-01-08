@@ -1,4 +1,4 @@
-import definePage from "@/sanity/helpers/define-page";
+import definePage from "../../helpers/define-page";
 import {AccessDeniedIcon} from "@sanity/icons";
 
 export const notFound = definePage({

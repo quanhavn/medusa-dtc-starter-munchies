@@ -1,4 +1,4 @@
-import definePage from "@/sanity/helpers/define-page";
+import definePage from "../../helpers/define-page";
 
 export const faqIndex = definePage({
   fields: [

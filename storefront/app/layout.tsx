@@ -38,7 +38,7 @@ export default function RootLayout({
         climateCrisis.variable,
         "overflow-x-clip overscroll-none scroll-smooth",
       )}
-      lang="en"
+      lang="vi"
     >
       <head>
         <link href="/favicon.ico" rel="icon" type="image/x-icon" />

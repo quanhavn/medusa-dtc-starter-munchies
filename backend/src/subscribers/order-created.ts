@@ -6,7 +6,7 @@ export default async function orderCreatedHandler({
 }: SubscriberArgs<{ id: string }>) {
   try {
     const response = await fetch(
-      "https://welcomed-entirely-grub.ngrok-free.app/store/email/order-confirmation/" +
+      `${process.env.BACKEND_URL}/store/email/order-confirmation/` +
         event.data.id,
       {
         method: "POST",

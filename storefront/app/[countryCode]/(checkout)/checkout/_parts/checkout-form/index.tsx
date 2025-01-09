@@ -31,7 +31,7 @@ export default function CheckoutForm({
     <StripeWrapper cart={cart}>
       <div className="w-full">
         <Heading desktopSize="2xl" font="serif" mobileSize="xl" tag="h3">
-          Checkout
+          Thanh toán
         </Heading>
         <AddressForm
           active={step === "addresses"}

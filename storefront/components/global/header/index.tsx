@@ -32,9 +32,9 @@ export default function Header(props: {countryCode: string} & Header) {
           </Suspense>
         </div>
         <div className="flex items-center gap-s">
-          <span className="hidden lg:block">
+          {/* <span className="hidden lg:block">
             <CountrySelector />
-          </span>
+          </span> */}
           <Suspense
             fallback={
               <div className="relative h-10 w-10 p-2">

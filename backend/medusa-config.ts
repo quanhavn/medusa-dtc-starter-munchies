@@ -6,7 +6,7 @@ export default defineConfig({
   projectConfig: {
     redisUrl: process.env.REDIS_URL,
     databaseUrl: process.env.DATABASE_URL,
-    databaseLogging: true,
+    // databaseLogging: true,
     http: {
       storeCors: process.env.STORE_CORS,
       adminCors: process.env.ADMIN_CORS,
@@ -16,8 +16,7 @@ export default defineConfig({
     },
   },
   admin: {
-    // backendUrl: "https://welcomed-entirely-grub.ngrok-free.app",
-    backendUrl: "https://welcomed-entirely-grub.ngrok-free.app",
+    backendUrl: process.env.BACKEND_URL,
   },
   modules: [
     {

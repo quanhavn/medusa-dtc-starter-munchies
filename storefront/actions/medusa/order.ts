@@ -82,6 +82,12 @@ export async function setCheckoutAddresses(
     const cartId = await getCartId();
     const customer = await getCustomer();
 
+    if (!customer) {
+      throw new Error("No existing customer found when setting addresses");
+    }
+    console.log(cartId)
+    console.log(customer)
+
     if (!cartId) {
       throw new Error("No existing cart found when setting addresses");
     }
@@ -101,7 +107,21 @@ export async function setCheckoutAddresses(
         postal_code: formData.get("shipping_address.postal_code"),
         province: formData.get("shipping_address.province"),
       },
+      // billing_address: {
+      //   address_2: "",
+      //   city: formData.get("shipping_address.city"),
+      //   company: formData.get("shipping_address.company"),
+      //   country_code: formData.get("shipping_address.country_code"),
+      //   first_name: formData.get("shipping_address.first_name"),
+      //   last_name: formData.get("shipping_address.last_name"),
+      //   phone: formData.get("billing_address.phone"),
+      //   postal_code: formData.get("shipping_address.postal_code"),
+      //   province: formData.get("shipping_address.province"),
+      // }
     } as any;
+    data.billing_address = data.shipping_address;
+
+    // console.log(data)
 
     if (formData.get("billing_address.address_1")) {
       data.billing_address = {

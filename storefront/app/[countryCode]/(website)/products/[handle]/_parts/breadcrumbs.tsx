@@ -9,7 +9,7 @@ export default function BreadCrumbs({
 }: Pick<StoreProduct, "collection" | "title">) {
   return (
     <Body className="-mb-1" desktopSize="base" font="sans" mobileSize="sm">
-      <LocalizedLink href="/">Home</LocalizedLink>{" "}
+      <LocalizedLink href="/">Trang chủ</LocalizedLink>{" "}
       {collection && (
         <>
           {" / "}

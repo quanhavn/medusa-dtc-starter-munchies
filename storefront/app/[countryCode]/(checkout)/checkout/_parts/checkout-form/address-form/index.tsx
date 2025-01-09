@@ -54,7 +54,7 @@ export default function AddressForm({
     >
       <div className="flex items-center justify-between">
         <Heading desktopSize="xs" font="sans" mobileSize="xs" tag="h6">
-          Shipping Address
+          Địa chỉ nhận hàng
         </Heading>
         {isFilled && (
           <Cta onClick={() => setStep("addresses")} size="sm" variant="outline">
@@ -66,7 +66,7 @@ export default function AddressForm({
         <div className="flex w-full flex-col gap-4 lg:flex-row">
           <div className="flex flex-1 flex-col gap-4">
             <Body className="font-semibold" font="sans">
-              Shipping address
+              Địa chỉ nhận hàng
             </Body>
             <div className="flex flex-col gap-[6px]">
               <Body font="sans">
@@ -82,43 +82,45 @@ export default function AddressForm({
           </div>
           <div className="flex flex-1 flex-col gap-4">
             <Body className="font-semibold" font="sans">
-              Contact
+              Liên hệ
             </Body>
             <Body font="sans">{cart.email}</Body>
+            <Body font="sans">{cart.shipping_address?.phone}</Body>
           </div>
         </div>
       )}
       {active && (
         <div className="flex flex-col gap-4">
-          <div className="grid gap-4 lg:grid-cols-2">
+          <div className="grid gap-4">
             <AddressInputs
               address={cart.shipping_address}
               addressName="shipping_address"
               countries={cart.region?.countries}
             />
           </div>
-          <Checkbox
+          {/* <Checkbox
             checked={checked}
             onCheckedChange={(v) =>
               setChecked(v === "indeterminate" ? false : v)
             }
-          />
+          /> */}
           <div className="grid gap-4 lg:grid-cols-2">
+            {cart.shipping_address?.phone}
+            <Input
+              defaultValue={cart.shipping_address?.phone}
+              name="phone"
+              placeholder="Số điện thoại"
+              required
+            />
             <Input
               defaultValue={cart.email}
               name="email"
               placeholder="Email"
               required
             />
-            {cart.shipping_address?.phone}
-            <Input
-              defaultValue={cart.shipping_address?.phone}
-              name="phone"
-              placeholder="Phone"
-            />
           </div>
 
-          {!checked && (
+          {/* {!checked && (
             <>
               <Heading desktopSize="xs" font="sans" mobileSize="xs" tag="h6">
                 Billing address
@@ -136,7 +138,7 @@ export default function AddressForm({
                 />
               </div>
             </>
-          )}
+          )} */}
           <SubmitButton />
         </div>
       )}
@@ -148,7 +150,7 @@ function SubmitButton() {
   const {pending} = useFormStatus();
   return (
     <Cta loading={pending} size="sm" type="submit">
-      Continue to delivery
+      Bước tiếp theo
     </Cta>
   );
 }
@@ -169,39 +171,39 @@ function AddressInputs({
       <Input
         defaultValue={address?.first_name}
         name={inputName("first_name")}
-        placeholder="First name"
+        placeholder="Tên người nhận"
         required
       />
-      <Input
+      {/* <Input
         defaultValue={address?.last_name}
         name={inputName("last_name")}
         placeholder="Last name"
         required
-      />
+      /> */}
       <Input
         defaultValue={address?.address_1}
         name={inputName("address_1")}
-        placeholder="Address"
+        placeholder="Địa chỉ"
         required
       />
-      <Input
+      {/* <Input
         defaultValue={address?.company}
         name={inputName("company")}
         placeholder="Company"
-      />
-      <Input
+      /> */}
+      {/* <Input
         defaultValue={address?.postal_code}
         name={inputName("postal_code")}
         placeholder="Postal code"
         required
-      />
-      <Input
+      /> */}
+      {/* <Input
         defaultValue={address?.city}
         name={inputName("city")}
         placeholder="City"
         required
-      />
-      <InputCombobox
+      /> */}
+      {/* <InputCombobox
         defaultValue={address?.country_code}
         name={inputName("country_code")}
         options={
@@ -222,13 +224,13 @@ function AddressInputs({
         }
         placeholder="Country"
         required
-      />
-      <Input
+      /> */}
+      {/* <Input
         defaultValue={address?.province}
         name={inputName("province")}
         placeholder="State/Province"
         required
-      />
+      /> */}
     </>
   );
 }

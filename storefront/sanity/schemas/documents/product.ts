@@ -3,6 +3,12 @@ import definePage from "../../helpers/define-page";
 export default definePage({
   fields: [
     {
+      name: "title",
+      title: "Title",
+      type: "string",
+      group: "content"
+    },
+    {
       group: "content",
       name: "specs",
       of: [

@@ -27,10 +27,10 @@ export default function CartFooter() {
         <div className="flex w-full justify-between gap-4">
           <div>
             <Body className="font-semibold" font="sans" mobileSize="base">
-              Subtotal
+              Tổng tiền
             </Body>
             <Body font="sans" mobileSize="sm">
-              Taxes and shipping calculated at checkout
+              Đã bao gồm thuế và phí giao hàng
             </Body>
           </div>
           {item_total && (
@@ -41,11 +41,11 @@ export default function CartFooter() {
         </div>
         {!cartIsEmpty && !isUpdating ? (
           <Link className="w-full" href="/checkout" size="lg" variant="primary">
-            Go to checkout
+            Thanh toán
           </Link>
         ) : (
           <Cta className="w-full" disabled size="lg" variant="primary">
-            Go to checkout
+            Thanh toán
           </Cta>
         )}
       </div>

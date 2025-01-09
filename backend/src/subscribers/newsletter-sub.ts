@@ -29,7 +29,7 @@ export default async function subscribeNewsletterHandler({
     // if (error) throw new Error("Error subscribing email");
 
     const response = await fetch(
-      "https://welcomed-entirely-grub.ngrok-free.app/store/email/welcome/" + event.data.id,
+      `${process.env.BACKEND_URL}/email/welcome/${event.data.id}`,
       {
         method: "POST",
         headers: {

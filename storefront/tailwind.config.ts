@@ -22,6 +22,9 @@ const config: Config = {
         sans: "var(--font-instrumentSans)",
         serif: "var(--font-instrumentSerif)",
         display: "var(--font-climateCrisis)",
+        // sans: ["Playwrite VN", "sans-serif"],
+        // serif: ["Playwrite VN", "sans-serif"],
+        // display: ["Playwrite VN", "sans-serif"],
       },
       colors: {
         background: "var(--background)",

@@ -16,8 +16,8 @@ export default defineConfig({
     },
   },
   admin: {
-    // backendUrl: "http://localhost:9000",
-    backendUrl: "http://localhost:9000",
+    // backendUrl: "https://welcomed-entirely-grub.ngrok-free.app",
+    backendUrl: "https://welcomed-entirely-grub.ngrok-free.app",
   },
   modules: [
     {
@@ -28,6 +28,7 @@ export default defineConfig({
         api_version: new Date().toISOString().split("T")[0],
         dataset: "production",
         studio_url: "http://localhost:3333/cms",
+        useCdn: false,
         type_map: {
           collection: "collection",
           category: "category",
@@ -44,7 +45,9 @@ export default defineConfig({
             resolve: "@medusajs/medusa/file-s3",
             id: "s3",
             options: {
-              authentication_method: "s3-iam-role",
+              // authentication_method: "s3-iam-role",
+              access_key_id: process.env.S3_ACCESS_KEY_ID,
+              secret_access_key: process.env.S3_SECRET_ACCESS_KEY,
               file_url: process.env.S3_FILE_URL,
               region: process.env.S3_REGION,
               bucket: process.env.S3_BUCKET,

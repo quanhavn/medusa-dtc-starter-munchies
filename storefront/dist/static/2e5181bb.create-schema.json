@@ -1,0 +1,2254 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "pathname",
+        "type": "slug",
+        "title": "URL"
+      },
+      {
+        "description": "This title is only used internally in Sanity, it won't be displayed on the website.",
+        "name": "internalTitle",
+        "type": "string",
+        "title": "Internal title"
+      },
+      {
+        "initialValue": true,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Won't show up in Google if set to false, but accessible through URL.",
+        "name": "indexable",
+        "type": "boolean"
+      },
+      {
+        "options": {
+          "collapsed": false,
+          "collapsible": true
+        },
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO & social"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "insertMenu": {
+            "views": [
+              {
+                "name": "grid"
+              }
+            ]
+          }
+        },
+        "name": "sections",
+        "type": "sectionsBody"
+      }
+    ],
+    "name": "modular.page",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "options": {
+          "maxLength": 70,
+          "minLength": 15
+        },
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "maxLength": 160,
+          "minLength": 50
+        },
+        "rows": 2,
+        "name": "description",
+        "type": "text",
+        "title": "Short description for SEO & social sharing (meta description)"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "description": "Highly encouraged for increasing conversion rates for links to this page shared in social media.",
+        "name": "image",
+        "type": "ogImage",
+        "title": "Social sharing image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "uri",
+                "constraint": {
+                  "options": {
+                    "scheme": [
+                      "/^http$/",
+                      "/^https$/"
+                    ],
+                    "allowRelative": false,
+                    "relativeOnly": false,
+                    "allowCredentials": false
+                  }
+                }
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Use this in case the content of this page is duplicated elsewhere and you'd like to point search engines to that other URL instead",
+        "name": "canonicalUrl",
+        "type": "url",
+        "title": "Custom canonical URL"
+      }
+    ],
+    "name": "seo",
+    "type": "object",
+    "title": "SEO"
+  },
+  {
+    "options": {
+      "hotspot": true
+    },
+    "description": "Highly encouraged for increasing conversion rates for links to this page shared in social media.",
+    "name": "ogImage",
+    "type": "image",
+    "title": "Social sharing image"
+  },
+  {
+    "fields": [
+      {
+        "name": "label",
+        "type": "string",
+        "title": "Button label"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "e.g. https://example.com or /products/product-variant",
+        "name": "link",
+        "type": "link"
+      }
+    ],
+    "name": "cta",
+    "type": "object",
+    "title": "CTA"
+  },
+  {
+    "validation": [
+      {
+        "rules": [
+          {
+            "flag": "presence",
+            "constraint": "required"
+          }
+        ],
+        "level": "error"
+      }
+    ],
+    "description": "e.g. https://example.com or /products/product-variant",
+    "name": "link",
+    "type": "string"
+  },
+  {
+    "fields": [
+      {
+        "weak": true,
+        "to": [
+          {
+            "options": {
+              "disableCreation": true,
+              "hideInternalTitle": true,
+              "hideSeo": true,
+              "localized": false
+            },
+            "type": "product"
+          }
+        ],
+        "name": "product",
+        "type": "reference"
+      },
+      {
+        "initialValue": 50,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 0
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "readOnly": true,
+        "name": "x",
+        "type": "number",
+        "fieldset": "position"
+      },
+      {
+        "initialValue": 50,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 0
+              },
+              {
+                "flag": "max",
+                "constraint": 100
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "readOnly": true,
+        "name": "y",
+        "type": "number",
+        "fieldset": "position"
+      }
+    ],
+    "fieldsets": [
+      {
+        "name": "position",
+        "options": {
+          "columns": 2
+        }
+      }
+    ],
+    "name": "spot",
+    "type": "object",
+    "title": "Product Hotspot"
+  },
+  {
+    "fields": [
+      {
+        "name": "url",
+        "type": "string",
+        "title": "URL"
+      },
+      {
+        "name": "poster",
+        "type": "image",
+        "title": "Thumbnail"
+      }
+    ],
+    "name": "video",
+    "type": "object"
+  },
+  {
+    "options": {
+      "disableCreation": true
+    },
+    "fields": [
+      {
+        "hidden": true,
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Will be used as the sharing image of all pages that don't define a custom one in their SEO fields.",
+        "name": "fallbackOgImage",
+        "type": "ogImage",
+        "title": "Fallback sharing image"
+      }
+    ],
+    "name": "settings",
+    "type": "document"
+  },
+  {
+    "options": {
+      "disableCreation": true
+    },
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "readOnly": true,
+        "name": "pathname",
+        "type": "slug",
+        "title": "URL"
+      },
+      {
+        "description": "This title is only used internally in Sanity, it won't be displayed on the website.",
+        "name": "internalTitle",
+        "type": "string",
+        "title": "Internal title"
+      },
+      {
+        "initialValue": true,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Won't show up in Google if set to false, but accessible through URL.",
+        "name": "indexable",
+        "type": "boolean"
+      },
+      {
+        "options": {
+          "collapsed": false,
+          "collapsible": true
+        },
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO & social"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "insertMenu": {
+            "views": [
+              {
+                "name": "grid"
+              }
+            ]
+          }
+        },
+        "name": "sections",
+        "type": "sectionsBody"
+      }
+    ],
+    "name": "home",
+    "type": "document"
+  },
+  {
+    "of": [
+      {
+        "marks": {
+          "annotations": [
+            {
+              "i18nTitleKey": "inputs.portable-text.annotation.link",
+              "options": {
+                "modal": {
+                  "type": "popover"
+                }
+              },
+              "fields": [
+                {
+                  "validation": [
+                    {
+                      "rules": [
+                        {
+                          "flag": "uri",
+                          "constraint": {
+                            "options": {
+                              "scheme": [
+                                "/^http$/",
+                                "/^https$/",
+                                "/^tel$/",
+                                "/^mailto$/"
+                              ],
+                              "allowRelative": true,
+                              "relativeOnly": false,
+                              "allowCredentials": false
+                            }
+                          }
+                        }
+                      ],
+                      "level": "error"
+                    }
+                  ],
+                  "description": "A valid web, email, phone, or relative link.",
+                  "name": "href",
+                  "type": "url",
+                  "title": "Link"
+                }
+              ],
+              "name": "link",
+              "type": "object"
+            }
+          ],
+          "decorators": [
+            {
+              "value": "strong",
+              "title": "Strong"
+            },
+            {
+              "value": "em",
+              "title": "Italic"
+            },
+            {
+              "value": "code",
+              "title": "Code"
+            },
+            {
+              "value": "underline",
+              "title": "Underline"
+            },
+            {
+              "value": "strike-through",
+              "title": "Strike"
+            }
+          ]
+        },
+        "lists": [
+          {
+            "value": "bullet",
+            "title": "Bullet list"
+          },
+          {
+            "value": "number",
+            "title": "Numbered list"
+          }
+        ],
+        "styles": [
+          {
+            "value": "normal",
+            "title": "Paragraph"
+          },
+          {
+            "value": "h2",
+            "title": "Section heading"
+          },
+          {
+            "value": "h3",
+            "title": "Sub-section"
+          },
+          {
+            "value": "blockquote",
+            "title": "Quote"
+          }
+        ],
+        "of": [],
+        "type": "block"
+      },
+      {
+        "fields": [
+          {
+            "options": {
+              "hotspot": true
+            },
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "fields": [
+              {
+                "name": "alt",
+                "type": "string",
+                "title": "Descriptive label for screen readers & SEO"
+              }
+            ],
+            "name": "image",
+            "type": "image"
+          },
+          {
+            "name": "caption",
+            "type": "string"
+          }
+        ],
+        "type": "object",
+        "name": "imageBlock",
+        "title": "Image"
+      }
+    ],
+    "name": "ptBody",
+    "type": "array",
+    "title": "Rich Text with blocks"
+  },
+  {
+    "of": [
+      {
+        "marks": {
+          "annotations": [],
+          "decorators": [
+            {
+              "value": "strong",
+              "title": "Strong"
+            },
+            {
+              "value": "em",
+              "title": "Emphasis"
+            },
+            {
+              "value": "underline",
+              "title": "Underline"
+            },
+            {
+              "value": "strike-through",
+              "title": "Strike"
+            }
+          ]
+        },
+        "styles": [
+          {
+            "value": "normal",
+            "title": "Paragraph"
+          }
+        ],
+        "of": [],
+        "type": "block"
+      }
+    ],
+    "name": "lightPtBody",
+    "type": "array",
+    "title": "Rich Text"
+  },
+  {
+    "options": {
+      "disableCreation": true
+    },
+    "fields": [
+      {
+        "hidden": true,
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "text",
+                "type": "ptBody"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "information",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "of": [
+                  {
+                    "type": "cta",
+                    "title": "CTA"
+                  }
+                ],
+                "name": "links",
+                "type": "array"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "name": "linkList",
+        "type": "array",
+        "title": "Link list"
+      },
+      {
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "name": "copy",
+        "type": "ptBody",
+        "title": "Newsletter Copy"
+      },
+      {
+        "name": "signup_success",
+        "type": "ptBody",
+        "title": "Signup success message"
+      },
+      {
+        "name": "signup_error",
+        "type": "ptBody",
+        "title": "Signup error message"
+      },
+      {
+        "name": "placeholder",
+        "type": "string",
+        "title": "Input placeholder"
+      },
+      {
+        "name": "button",
+        "type": "string",
+        "title": "Newsletter button"
+      },
+      {
+        "name": "footnote",
+        "type": "ptBody",
+        "title": "Newsletter footnote"
+      },
+      {
+        "of": [
+          {
+            "type": "cta",
+            "title": "CTA"
+          }
+        ],
+        "name": "bottomLinks",
+        "type": "array",
+        "title": "Bottom links"
+      },
+      {
+        "of": [
+          {
+            "type": "cta",
+            "title": "CTA"
+          }
+        ],
+        "name": "socialLinks",
+        "type": "array",
+        "title": "Social links"
+      }
+    ],
+    "name": "footer",
+    "type": "document"
+  },
+  {
+    "options": {
+      "disableCreation": true
+    },
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "readOnly": true,
+        "name": "pathname",
+        "type": "slug",
+        "title": "URL"
+      },
+      {
+        "description": "This title is only used internally in Sanity, it won't be displayed on the website.",
+        "name": "internalTitle",
+        "type": "string",
+        "title": "Internal title"
+      },
+      {
+        "initialValue": true,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Won't show up in Google if set to false, but accessible through URL.",
+        "name": "indexable",
+        "type": "boolean"
+      },
+      {
+        "options": {
+          "collapsed": false,
+          "collapsible": true
+        },
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO & social"
+      },
+      {
+        "name": "text",
+        "type": "string"
+      },
+      {
+        "name": "cta",
+        "type": "cta",
+        "title": "CTA"
+      }
+    ],
+    "name": "not.found",
+    "type": "document",
+    "title": "Not Found Page"
+  },
+  {
+    "options": {
+      "disableCreation": true
+    },
+    "fields": [
+      {
+        "hidden": true,
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "showAnnouncement",
+        "type": "boolean",
+        "title": "Show announcement bar"
+      },
+      {
+        "name": "announcementText",
+        "type": "lightPtBody",
+        "title": "Announcement bar text"
+      },
+      {
+        "of": [
+          {
+            "type": "link"
+          },
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "of": [
+                  {
+                    "fields": [
+                      {
+                        "validation": [
+                          {
+                            "rules": [
+                              {
+                                "flag": "presence",
+                                "constraint": "required"
+                              }
+                            ],
+                            "level": "error"
+                          }
+                        ],
+                        "name": "title",
+                        "type": "string"
+                      },
+                      {
+                        "validation": [
+                          {
+                            "rules": [
+                              {
+                                "flag": "presence",
+                                "constraint": "required"
+                              }
+                            ],
+                            "level": "error"
+                          }
+                        ],
+                        "of": [
+                          {
+                            "type": "link"
+                          }
+                        ],
+                        "name": "links",
+                        "type": "array"
+                      }
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "name": "columns",
+                "type": "array"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "custom"
+                      },
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      },
+                      {
+                        "flag": "min",
+                        "constraint": 2
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "of": [
+                  {
+                    "fields": [
+                      {
+                        "validation": [
+                          {
+                            "rules": [
+                              {
+                                "flag": "presence",
+                                "constraint": "required"
+                              }
+                            ],
+                            "level": "error"
+                          }
+                        ],
+                        "name": "image",
+                        "type": "image"
+                      },
+                      {
+                        "validation": [
+                          {
+                            "rules": [
+                              {
+                                "flag": "presence",
+                                "constraint": "required"
+                              }
+                            ],
+                            "level": "error"
+                          }
+                        ],
+                        "name": "title",
+                        "type": "string"
+                      },
+                      {
+                        "validation": [
+                          {
+                            "rules": [
+                              {
+                                "flag": "presence",
+                                "constraint": "required"
+                              }
+                            ],
+                            "level": "error"
+                          }
+                        ],
+                        "name": "cta",
+                        "type": "cta",
+                        "title": "CTA"
+                      }
+                    ],
+                    "type": "object"
+                  }
+                ],
+                "name": "cards",
+                "type": "array"
+              }
+            ],
+            "type": "object",
+            "name": "dropdown"
+          }
+        ],
+        "name": "navigation",
+        "type": "array"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "max",
+                "constraint": 3
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "to": [
+              {
+                "options": {
+                  "disableCreation": true,
+                  "hideInternalTitle": true,
+                  "hideSeo": true,
+                  "localized": false
+                },
+                "type": "product"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to product page"
+          }
+        ],
+        "name": "cartAddons",
+        "type": "array",
+        "title": "Addons"
+      }
+    ],
+    "name": "header",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "image",
+        "options": {
+          "layout": "dropdown",
+          "list": [
+            {
+              "title": "Image",
+              "value": "image"
+            },
+            {
+              "title": "Large Image",
+              "value": "largeImage"
+            },
+            {
+              "title": "Video",
+              "value": "video"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "image",
+                  "largeImage",
+                  "video"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "mediaType",
+        "type": "string",
+        "title": "Media type"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "hidden": "conditional",
+        "name": "subtitle",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "cta",
+        "type": "cta",
+        "title": "Call to action"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "largeImage",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "hidden": "conditional",
+        "name": "video",
+        "type": "video"
+      }
+    ],
+    "name": "section.hero",
+    "type": "object",
+    "title": "Hero section"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "text",
+        "type": "text"
+      }
+    ],
+    "name": "section.centeredText",
+    "type": "object",
+    "title": "Centered text section"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "text",
+        "type": "array"
+      }
+    ],
+    "name": "section.marquee",
+    "type": "object",
+    "title": "Marquee section"
+  },
+  {
+    "fields": [
+      {
+        "initialValue": "left",
+        "options": {
+          "layout": "dropdown",
+          "list": [
+            {
+              "title": "Left",
+              "value": "left"
+            },
+            {
+              "title": "Right",
+              "value": "right"
+            }
+          ]
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "valid",
+                "constraint": [
+                  "left",
+                  "right"
+                ]
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "imagePosition",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "description",
+        "type": "text"
+      }
+    ],
+    "name": "section.mediaText",
+    "type": "object",
+    "title": "Media + text section"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 4
+              },
+              {
+                "flag": "max",
+                "constraint": 10
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "to": [
+              {
+                "type": "testimonial"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to testimonial"
+          }
+        ],
+        "name": "testimonials",
+        "type": "array"
+      }
+    ],
+    "name": "section.testimonials",
+    "type": "object",
+    "title": "Testimonials section"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "of": [
+          {
+            "to": [
+              {
+                "options": {
+                  "disableCreation": true,
+                  "hideInternalTitle": true,
+                  "hideSeo": true,
+                  "localized": false
+                },
+                "type": "product"
+              }
+            ],
+            "type": "reference",
+            "title": "Reference to product page"
+          }
+        ],
+        "name": "products",
+        "type": "array"
+      },
+      {
+        "name": "cta",
+        "type": "cta",
+        "title": "CTA"
+      }
+    ],
+    "name": "section.featuredProducts",
+    "type": "object",
+    "title": "Featured products section"
+  },
+  {
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 3
+              },
+              {
+                "flag": "max",
+                "constraint": 3
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "description",
+                "type": "text"
+              }
+            ],
+            "type": "object",
+            "name": "card"
+          }
+        ],
+        "name": "cards",
+        "type": "array"
+      }
+    ],
+    "name": "section.assurance",
+    "type": "object",
+    "title": "Assurance section"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "image",
+        "type": "image"
+      },
+      {
+        "options": {
+          "imageHotspot": {
+            "imagePath": "image",
+            "pathRoot": "parent"
+          }
+        },
+        "of": [
+          {
+            "fieldsets": [
+              {
+                "name": "position",
+                "options": {
+                  "columns": 2
+                }
+              }
+            ],
+            "type": "spot",
+            "title": "Product Hotspot"
+          }
+        ],
+        "name": "productHotSpots",
+        "type": "array",
+        "title": "Product Spots"
+      }
+    ],
+    "name": "section.shopTheLook",
+    "type": "object",
+    "title": "Shop the look section"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 3
+              },
+              {
+                "flag": "max",
+                "constraint": 3
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "fields": [
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "image",
+                "type": "image"
+              },
+              {
+                "validation": [
+                  {
+                    "rules": [
+                      {
+                        "flag": "presence",
+                        "constraint": "required"
+                      }
+                    ],
+                    "level": "error"
+                  }
+                ],
+                "name": "cta",
+                "type": "cta",
+                "title": "Call to action"
+              }
+            ],
+            "type": "object",
+            "name": "collectionCard"
+          }
+        ],
+        "name": "cards",
+        "type": "array"
+      }
+    ],
+    "name": "section.collectionList",
+    "type": "object",
+    "title": "Collection list section"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "quote",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "author",
+        "type": "string"
+      }
+    ],
+    "name": "testimonial",
+    "type": "document"
+  },
+  {
+    "options": {
+      "insertMenu": {
+        "views": [
+          {
+            "name": "grid"
+          }
+        ]
+      }
+    },
+    "of": [
+      {
+        "type": "section.hero",
+        "title": "Hero section"
+      },
+      {
+        "type": "section.centeredText",
+        "title": "Centered text section"
+      },
+      {
+        "type": "section.marquee",
+        "title": "Marquee section"
+      },
+      {
+        "type": "section.mediaText",
+        "title": "Media + text section"
+      },
+      {
+        "type": "section.testimonials",
+        "title": "Testimonials section"
+      },
+      {
+        "type": "section.featuredProducts",
+        "title": "Featured products section"
+      },
+      {
+        "type": "section.assurance",
+        "title": "Assurance section"
+      },
+      {
+        "type": "section.shopTheLook",
+        "title": "Shop the look section"
+      },
+      {
+        "type": "section.collectionList",
+        "title": "Collection list section"
+      }
+    ],
+    "name": "sectionsBody",
+    "type": "array",
+    "title": "Sections content"
+  },
+  {
+    "options": {
+      "disableCreation": true,
+      "hideInternalTitle": true,
+      "hideSeo": true,
+      "localized": false
+    },
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "readOnly": true,
+        "name": "pathname",
+        "type": "slug",
+        "title": "URL"
+      },
+      {
+        "description": "This title is only used internally in Sanity, it won't be displayed on the website.",
+        "hidden": true,
+        "name": "internalTitle",
+        "type": "string",
+        "title": "Internal title"
+      },
+      {
+        "initialValue": true,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Won't show up in Google if set to false, but accessible through URL.",
+        "name": "indexable",
+        "type": "boolean"
+      },
+      {
+        "options": {
+          "collapsed": false,
+          "collapsible": true
+        },
+        "hidden": true,
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO & social"
+      },
+      {
+        "of": [
+          {
+            "fields": [
+              {
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "rows": 3,
+                "name": "content",
+                "type": "text"
+              }
+            ],
+            "type": "object",
+            "name": "spec"
+          }
+        ],
+        "name": "specs",
+        "type": "array"
+      },
+      {
+        "fields": [
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "max",
+                    "constraint": 3
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "of": [
+              {
+                "to": [
+                  {
+                    "options": {
+                      "disableCreation": true,
+                      "hideInternalTitle": true,
+                      "hideSeo": true,
+                      "localized": false
+                    },
+                    "type": "product"
+                  }
+                ],
+                "type": "reference",
+                "title": "Reference to product page"
+              }
+            ],
+            "name": "products",
+            "type": "array",
+            "title": "Addons"
+          }
+        ],
+        "name": "addons",
+        "type": "object"
+      },
+      {
+        "options": {
+          "insertMenu": {
+            "views": [
+              {
+                "name": "grid"
+              }
+            ]
+          }
+        },
+        "name": "sections",
+        "type": "sectionsBody"
+      }
+    ],
+    "name": "product",
+    "type": "document",
+    "title": "Product Page"
+  },
+  {
+    "options": {
+      "disableCreation": true
+    },
+    "fields": [
+      {
+        "hidden": true,
+        "name": "internalTitle",
+        "type": "string",
+        "title": "Title"
+      }
+    ],
+    "name": "collection",
+    "type": "document"
+  },
+  {
+    "options": {
+      "disableCreation": true
+    },
+    "fields": [
+      {
+        "hidden": true,
+        "name": "internalTitle",
+        "type": "string",
+        "title": "Title"
+      }
+    ],
+    "name": "category",
+    "type": "document"
+  },
+  {
+    "options": {
+      "disableCreation": true
+    },
+    "description": "Only relevant if you're storing user cookies",
+    "fields": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "name": "rejectButton",
+        "type": "string",
+        "title": "Reject cookies button"
+      },
+      {
+        "name": "acceptButton",
+        "type": "string",
+        "title": "Accept cookies button"
+      }
+    ],
+    "name": "cookie.banner",
+    "type": "document",
+    "title": "Cookie banner"
+  },
+  {
+    "options": {
+      "disableCreation": true
+    },
+    "fields": [
+      {
+        "name": "noResultsText",
+        "type": "string",
+        "title": "No results text"
+      },
+      {
+        "name": "noResultsDescription",
+        "type": "string",
+        "title": "No results description"
+      }
+    ],
+    "name": "dictionary",
+    "type": "document",
+    "title": "dictionary"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "pathname",
+        "type": "slug",
+        "title": "URL"
+      },
+      {
+        "description": "This title is only used internally in Sanity, it won't be displayed on the website.",
+        "name": "internalTitle",
+        "type": "string",
+        "title": "Internal title"
+      },
+      {
+        "initialValue": true,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Won't show up in Google if set to false, but accessible through URL.",
+        "name": "indexable",
+        "type": "boolean"
+      },
+      {
+        "options": {
+          "collapsed": false,
+          "collapsible": true
+        },
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO & social"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string",
+        "title": "title"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "description",
+        "type": "text"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "body",
+        "type": "ptBody",
+        "title": "Content"
+      }
+    ],
+    "name": "text.page",
+    "type": "document"
+  },
+  {
+    "options": {
+      "disableCreation": true
+    },
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "readOnly": true,
+        "name": "pathname",
+        "type": "slug",
+        "title": "URL"
+      },
+      {
+        "description": "This title is only used internally in Sanity, it won't be displayed on the website.",
+        "name": "internalTitle",
+        "type": "string",
+        "title": "Internal title"
+      },
+      {
+        "initialValue": true,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "description": "Won't show up in Google if set to false, but accessible through URL.",
+        "name": "indexable",
+        "type": "boolean"
+      },
+      {
+        "options": {
+          "collapsed": false,
+          "collapsible": true
+        },
+        "name": "seo",
+        "type": "seo",
+        "title": "SEO & social"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "description",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "fields": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "searchPlaceholder",
+            "type": "string",
+            "title": "Search placeholder"
+          },
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "name": "searchNoResults",
+            "type": "string",
+            "title": "Search no results"
+          }
+        ],
+        "name": "textTranslations",
+        "type": "object",
+        "title": "Text translations"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "to": [
+              {
+                "options": {
+                  "disableCreation": true,
+                  "localized": true
+                },
+                "type": "faq.category"
+              }
+            ],
+            "type": "reference",
+            "name": "title",
+            "title": "Category title"
+          }
+        ],
+        "name": "category",
+        "type": "array"
+      }
+    ],
+    "name": "faq.index",
+    "type": "document"
+  },
+  {
+    "options": {
+      "localized": false
+    },
+    "description": "Frequently asked questions",
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "question",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "answer",
+        "type": "text"
+      }
+    ],
+    "name": "faq.entry",
+    "type": "document",
+    "title": "FAQs"
+  },
+  {
+    "options": {
+      "disableCreation": true,
+      "localized": true
+    },
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "title"
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug",
+        "title": "Category's URL-friendly path"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "of": [
+          {
+            "validation": [
+              {
+                "rules": [
+                  {
+                    "flag": "presence",
+                    "constraint": "required"
+                  }
+                ],
+                "level": "error"
+              }
+            ],
+            "to": [
+              {
+                "options": {
+                  "localized": false
+                },
+                "type": "faq.entry"
+              }
+            ],
+            "type": "reference",
+            "name": "question"
+          }
+        ],
+        "name": "questions",
+        "type": "array"
+      }
+    ],
+    "name": "faq.category",
+    "type": "document",
+    "title": "FAQ category"
+  }
+]

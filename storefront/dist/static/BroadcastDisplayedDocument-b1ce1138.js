@@ -1,0 +1,1 @@
+import{r as o,c0 as s}from"./sanity-4f5def7c.js";import{u}from"./DisplayedDocumentBroadcaster-9e539efc.js";function c(a){const e=u(),t=s(!1);return o.useEffect(()=>{const r=setTimeout(()=>e==null?void 0:e(a.value),10);return()=>clearTimeout(r)},[t==null?void 0:t.perspective,a.value,e]),null}var i=o.memo(c);export{i as default};

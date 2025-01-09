@@ -16,8 +16,9 @@
     --max-width: 1440px;
     --min-width: 320px;
     /* colors */
-    --background: #fff6e6;
-    --accent: #ff5227;
+    --background: #f8f2e8;
+    /* --accent: #ff5227; */
+    --accent: #e7802c;
     --accent-40: rgba(255, 82, 39, 0.4);
     --secondary: #f9dff2;
     --base-font-size: 16px;

@@ -21,9 +21,9 @@ export default function Header(props: {countryCode: string} & Header) {
             <HamburgerContainer sanityData={props} />
             <LocalizedLink href="/" prefetch>
               <img
-                alt="Mubchies logo"
-                className="my-[9px] h-[22px] w-fit lg:my-[10px] lg:h-9"
-                src="/images/logo.svg"
+                alt="Bếp nhà Sun logo"
+                className="my-[9px] h-16 w-fit lg:my-[10px] lg:h-20"
+                src="/images/logo.png"
               />
             </LocalizedLink>
           </div>

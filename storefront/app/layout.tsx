@@ -3,23 +3,24 @@ import {
   Climate_Crisis,
   Instrument_Sans,
   Instrument_Serif,
+  Braah_One
 } from "next/font/google";
 
 import dynamicFavicon from "./dynamic-favicon";
 import "./globals.css";
 
-const instrumentSans = Instrument_Sans({
-  subsets: ["latin"],
+const instrumentSans = Braah_One({
+  // subsets: ["latin"],
   variable: "--font-instrumentSans",
-  weight: ["400", "500", "600"],
+  weight: ["400"],
 });
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
+const instrumentSerif = Braah_One({
+  // subsets: ["latin"],
   variable: "--font-instrumentSerif",
   weight: ["400"],
 });
-const climateCrisis = Climate_Crisis({
-  subsets: ["latin"],
+const climateCrisis = Braah_One({
+  // subsets: ["latin"],
   variable: "--font-climateCrisis",
   weight: ["400"],
 });

@@ -40,9 +40,9 @@ export default async function Layout(props: LayoutProps) {
         <div className="mx-auto my-s w-full max-w-max-screen bg-background px-m lg:px-xl">
           <LocalizedLink href="/" prefetch>
             <img
-              alt="Mubchies logo"
+              alt="Bếp nhà Sun logo"
               className="h-[22px] w-fit lg:h-8"
-              src="/images/logo.svg"
+              src="/images/logo.png"
             />
           </LocalizedLink>
         </div>

@@ -9,17 +9,17 @@ const baseUrl = baseUrlWithoutProtocol
 
 const config = {
   backendUrl:
-    process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "http://localhost:9000/store",
+    process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "https://welcomed-entirely-grub.ngrok-free.app/store",
   baseUrl,
-  defaultCountryCode: "us",
+  defaultCountryCode: "vn",
   sanity: {
-    apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2023-06-21",
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "",
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "",
+    apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2025-01-01",
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "qau35ymi",
     revalidateSecret: process.env.SANITY_REVALIDATE_SECRET || "",
     studioUrl: "/cms",
     // Not exposed to the front-end, used solely by the server
-    token: process.env.SANITY_API_TOKEN || "",
+    token: process.env.SANITY_API_TOKEN || "skTkPUQYGUbr3XRIBu5KtkXXY8OcGVRHB9aBHqz7krXH1THu6XzbX9mRK7pgd4uLq2KDb9g0HVPSiTlUYzsEx3MtM5DguLSUbDBrWl7ulhfZMNEAn8Cmimxi30AOZ2pjdIXsGO6vYw52NNbN5mpjk8F8NEIZbuxHF9CAscVzQv8cNZ7zquoC",
   },
   siteName: "Munchies",
 };

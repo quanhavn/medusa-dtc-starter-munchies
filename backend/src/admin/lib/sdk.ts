@@ -1,6 +1,6 @@
 import Medusa from "@medusajs/js-sdk";
 
-export const backendUrl = "http://localhost:9000";
+export const backendUrl = "https://welcomed-entirely-grub.ngrok-free.app";
 
 export const sdk = new Medusa({
   baseUrl: backendUrl,

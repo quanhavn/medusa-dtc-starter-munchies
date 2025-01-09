@@ -6,7 +6,7 @@ export default async function orderShippedHandler({
 }: SubscriberArgs<{ id: string }>) {
   try {
     const response = await fetch(
-      "http://localhost:9000/store/email/shipping-confirmation/" +
+      "https://welcomed-entirely-grub.ngrok-free.app/store/email/shipping-confirmation/" +
         event.data.id,
       {
         method: "POST",

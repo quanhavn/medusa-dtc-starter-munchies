@@ -62,6 +62,8 @@ export const getProducts = unstable_cache(
       {next: {tags: ["products"]}},
     );
 
+    console.log(products)
+
     return {
       hasNextPage: count > offset + limit,
       products,

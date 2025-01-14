@@ -5,29 +5,33 @@ import type {Dispatch, SetStateAction} from "react";
 
 import {setCheckoutAddresses} from "@/actions/medusa/order";
 import {Cta} from "@/components/shared/button";
-import Checkbox from "@/components/shared/checkbox";
+// import Checkbox from "@/components/shared/checkbox";
 import Input from "@/components/shared/input";
-import InputCombobox from "@/components/shared/input-combobox";
+// import InputCombobox from "@/components/shared/input-combobox";
 import Body from "@/components/shared/typography/body";
 import Heading from "@/components/shared/typography/heading";
 import {useResetableActionState} from "@/hooks/use-resetable-action-state";
 import {useEffect, useState, useTransition} from "react";
 import {useFormStatus} from "react-dom";
+import { getAuthHeaders, getCartId } from "@/data/medusa/cookies";
+import medusa from "@/data/medusa/client";
 
 export default function AddressForm({
   active,
   cart,
   nextStep,
   setStep,
+  // setCart, // Add this prop
 }: {
   active: boolean;
   cart: StoreCart;
-  nextStep: "addresses" | "delivery" | "payment" | "review";
+  nextStep: "addresses" | "delivery" | "payment" | "review" | "payos";
   setStep: Dispatch<
-    SetStateAction<"addresses" | "delivery" | "payment" | "review">
+    SetStateAction<"addresses" | "delivery" | "payment" | "review" | "payos">
   >;
+  // setCart: (cart: StoreCart) => void; // Add this type
 }) {
-  const [checked, setChecked] = useState(true);
+  // const [checked, setChecked] = useState(true);
   const [, startTransition] = useTransition();
 
   const [{status}, action, , reset] = useResetableActionState(
@@ -37,6 +41,14 @@ export default function AddressForm({
       status: "idle",
     },
   );
+
+  // async (state: any, formData: FormData) => {
+  //   const result = await setCheckoutAddresses(state, formData);
+  //   if (result.status === "success" && result.cart) {
+  //     setCart(result.cart);
+  //   }
+  //   return result;
+  // },
 
   useEffect(() => {
     if (status === "success") {
@@ -54,11 +66,11 @@ export default function AddressForm({
     >
       <div className="flex items-center justify-between">
         <Heading desktopSize="xs" font="sans" mobileSize="xs" tag="h6">
-          Địa chỉ nhận hàng
+          Nhập thông tin đặt hàng
         </Heading>
         {isFilled && (
           <Cta onClick={() => setStep("addresses")} size="sm" variant="outline">
-            Edit
+            Chỉnh sửa
           </Cta>
         )}
       </div>
@@ -74,18 +86,18 @@ export default function AddressForm({
                 {cart.shipping_address?.last_name}
               </Body>
               <Body font="sans">{cart.shipping_address?.address_1}</Body>
-              <Body font="sans">
+              {/* <Body font="sans">
                 {cart.shipping_address?.postal_code},{" "}
                 {cart.shipping_address?.city}
-              </Body>
+              </Body> */}
             </div>
           </div>
           <div className="flex flex-1 flex-col gap-4">
             <Body className="font-semibold" font="sans">
               Liên hệ
             </Body>
-            <Body font="sans">{cart.email}</Body>
-            <Body font="sans">{cart.shipping_address?.phone}</Body>
+            <Body font="sans">Email: {cart.email}</Body>
+            <Body font="sans">SĐT: {cart.shipping_address?.phone}</Body>
           </div>
         </div>
       )}
@@ -105,13 +117,13 @@ export default function AddressForm({
             }
           /> */}
           <div className="grid gap-4 lg:grid-cols-2">
-            {cart.shipping_address?.phone}
-            <Input
+            {/* {cart.shipping_address?.phone}*/}
+            {/* <Input
               defaultValue={cart.shipping_address?.phone}
               name="phone"
               placeholder="Số điện thoại"
               required
-            />
+            />  */}
             <Input
               defaultValue={cart.email}
               name="email"
@@ -184,6 +196,12 @@ function AddressInputs({
         defaultValue={address?.address_1}
         name={inputName("address_1")}
         placeholder="Địa chỉ"
+        required
+      />
+      <Input
+        defaultValue={address?.phone}
+        name={inputName("phone")}
+        placeholder="Số điện thoại"
         required
       />
       {/* <Input

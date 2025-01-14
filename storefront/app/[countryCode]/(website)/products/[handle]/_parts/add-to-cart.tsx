@@ -26,7 +26,7 @@ export default function AddToCart({
       label="Thêm vào giỏ hàng"
       productVariant={activeVariant}
       regionId={region_id}
-      size={variant === "PDP" ? "xl" : "md"}
+      size={variant === "PDP" ? "md" : "sm"}
       variant={variant === "PDP" ? "outline" : "primary"}
     />
   );

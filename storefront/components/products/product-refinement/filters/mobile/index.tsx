@@ -87,12 +87,12 @@ export default function MobileFilterDropdown({children}: Props) {
       </div>
 
       <div className="sticky bottom-0 my-2 flex w-[calc(100vw-40px)] flex-col justify-center gap-s px-xs">
-        <Cta className="w-full" onClick={() => setOpen(false)} size="md">
-          Show Results
+        <Cta className="w-full" onClick={() => setOpen(false)} size="sm">
+          Xem kết quả
         </Cta>
         <button onClick={() => clearSearchParams()}>
           <Body className="underline" font="sans" mobileSize="sm">
-            Clear all
+            Xoá điều kiện tìm kiếm
           </Body>
         </button>
       </div>

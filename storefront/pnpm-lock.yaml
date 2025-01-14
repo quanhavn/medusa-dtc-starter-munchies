@@ -21,6 +21,9 @@ importers:
       '@next/env':
         specifier: 15.0.0
         version: 15.0.0
+      '@payos/payos-checkout':
+        specifier: ^1.0.8
+        version: 1.0.8
       '@portabletext/react':
         specifier: ^3.1.0
         version: 3.1.0(react@19.0.0-rc-65a56d0e-20241020)
@@ -1405,6 +1408,9 @@ packages:
   '@nolyfill/is-core-module@1.0.39':
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
+
+  '@payos/payos-checkout@1.0.8':
+    resolution: {integrity: sha512-9h2sZ/QeOIsOR3+6LDswDMYPfRGQ9kXiWJC4yrWFbpAzUYoI3gH84oFRHlAmx4CRFh2SCBKE1Q2pdzJ1atPRCA==}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -7172,6 +7178,8 @@ snapshots:
       fastq: 1.17.1
 
   '@nolyfill/is-core-module@1.0.39': {}
+
+  '@payos/payos-checkout@1.0.8': {}
 
   '@pkgjs/parseargs@0.11.0':
     optional: true

@@ -24,33 +24,33 @@ export default async function Filters() {
   return (
     <>
       <div className="hidden lg:flex lg:items-center lg:gap-s">
-        <Suspense fallback={<EmptyDropdown placeholder="Collections" />}>
+        <Suspense fallback={<EmptyDropdown placeholder="Bộ sưu tập" />}>
           <FilterSelect
             name="collection"
             options={collection_options}
-            placeholder="Collections"
+            placeholder="Bộ sưu tập"
           />
         </Suspense>
-        <Suspense fallback={<EmptyDropdown placeholder="Categories" />}>
+        <Suspense fallback={<EmptyDropdown placeholder="Danh mục" />}>
           <FilterSelect
             name="category"
             options={category_options}
-            placeholder="Categories"
+            placeholder="Danh mục"
           />
         </Suspense>
         <ClearAllButton variant="underline" />
       </div>
       <div className="flex lg:hidden">
-        <Suspense fallback={<EmptyDropdown placeholder="Filter" />}>
+        <Suspense fallback={<EmptyDropdown placeholder="Bộ lọc" />}>
           <MobileFilterDropdown>
             <div className="flex flex-col gap-xs p-xs">
               <Accordion
-                heading="Collections"
+                heading="Bộ sưu tập"
                 name="collection"
                 options={collection_options}
               />
               <Accordion
-                heading="Categories"
+                heading="Danh mục"
                 name="categroy"
                 options={category_options}
               />

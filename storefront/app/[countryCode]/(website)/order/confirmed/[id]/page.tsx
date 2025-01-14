@@ -41,28 +41,28 @@ export default async function OrderConfirmedPage(props: PageProps<"id">) {
           mobileSize="lg"
           tag="h1"
         >
-          Thank you! Your order was placed successfully
+          Cảm ơn bạn! Đơn hàng của bạn đã được đặt thành công
         </Heading>
 
-        <Body className="font-medium" desktopSize="xl" font="sans">
-          We have sent the order confirmation details to {order.email}
-        </Body>
+        {/* <Body className="font-medium" desktopSize="xl" font="sans">
+          Chúng tôi đã gửi chi tiết xác nhận đơn hàng đến {order.email}
+        </Body> */}
 
         <Body desktopSize="base" font="sans">
-          Order date:{" "}
-          {new Date(order.created_at).toLocaleDateString("en-US", {
+          Ngày đặt hàng:{" "}
+          {new Date(order.created_at).toLocaleDateString("vi-VN", {
             day: "numeric",
             month: "long",
             year: "numeric",
           })}
         </Body>
         <Body desktopSize="base" font="sans">
-          Order number: {order.display_id}
+          Số đơn hàng: {order.id.replace("order_", "")}
         </Body>
       </div>
       <div className="flex flex-col gap-s">
         <Heading desktopSize="xl" font="serif" mobileSize="lg" tag="h2">
-          Summary
+          Chi tiết đơn hàng
         </Heading>
         <div className="flex flex-col gap-s">
           {order.items.map((item) => {
@@ -76,18 +76,18 @@ export default async function OrderConfirmedPage(props: PageProps<"id">) {
           })}
           <Separator />
           <SubLineItem
-            title="Subtotal"
+            title=""
             value={convertMoney(order.item_subtotal)}
           />
-          <SubLineItem title="Taxes" value={convertMoney(order.tax_total)} />
+          {/* <SubLineItem title="Thuế" value={convertMoney(order.tax_total)} /> */}
           <SubLineItem
-            title="Shipping"
+            title="Vận chuyển"
             value={convertMoney(order.shipping_total)}
           />
           <Separator />
           <div className="flex justify-between">
             <Heading desktopSize="base" font="sans" mobileSize="sm" tag="h4">
-              Total
+              Tổng cộng
             </Heading>
             <Heading desktopSize="base" font="sans" mobileSize="sm" tag="h4">
               {convertMoney(order.total)}
@@ -98,7 +98,7 @@ export default async function OrderConfirmedPage(props: PageProps<"id">) {
       </div>
       <div className="flex flex-col gap-s">
         <Heading desktopSize="xl" font="serif" mobileSize="lg" tag="h2">
-          Delivery
+          Thông tin giao hàng
         </Heading>
         <div className="flex flex-col gap-xl lg:flex-row lg:gap-s">
           <div className="flex flex-1 flex-col gap-[6px]">
@@ -107,7 +107,7 @@ export default async function OrderConfirmedPage(props: PageProps<"id">) {
               desktopSize="base"
               font="sans"
             >
-              Shipping Address
+              Địa chỉ giao hàng
             </Body>
             <Body className="font-medium" desktopSize="base" font="sans">
               {order.shipping_address?.first_name}{" "}
@@ -127,7 +127,7 @@ export default async function OrderConfirmedPage(props: PageProps<"id">) {
               desktopSize="base"
               font="sans"
             >
-              Contact
+              Liên hệ
             </Body>
             <Body className="font-medium" desktopSize="base" font="sans">
               {order.email}
@@ -141,7 +141,7 @@ export default async function OrderConfirmedPage(props: PageProps<"id">) {
                 desktopSize="base"
                 font="sans"
               >
-                Method
+                Phương thức
               </Body>
               <Body className="font-medium" desktopSize="base" font="sans">
                 {shippingMethod?.name}

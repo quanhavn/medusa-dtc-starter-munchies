@@ -7,7 +7,7 @@ import Heading from "@/components/shared/typography/heading";
 
 import PaymentButton from "./payment/button";
 
-export default function Review({
+export default function PayOS({
   active,
   cart,
 }: {
@@ -19,7 +19,7 @@ export default function Review({
   return (
     <div className="flex w-full flex-col gap-8 border-t border-accent py-8">
       <Heading desktopSize="xs" font="sans" mobileSize="xs" tag="h6">
-        Xác nhận
+        Xác nhận1111
       </Heading>
       <>
         <Body>

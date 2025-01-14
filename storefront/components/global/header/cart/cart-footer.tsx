@@ -30,7 +30,7 @@ export default function CartFooter() {
               Tổng tiền
             </Body>
             <Body font="sans" mobileSize="sm">
-              Đã bao gồm thuế và phí giao hàng
+              Đã bao gồm thuế
             </Body>
           </div>
           {item_total && (

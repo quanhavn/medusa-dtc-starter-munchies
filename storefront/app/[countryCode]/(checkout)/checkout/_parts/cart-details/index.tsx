@@ -10,7 +10,7 @@ export default function CartDetails({cart}: {cart: HttpTypes.StoreCart}) {
   return (
     <div className="flex h-fit w-full flex-col gap-4 rounded-lg border border-accent p-4 md:max-w-[420px]">
       <Heading desktopSize="xl" font="serif" mobileSize="lg" tag="h3">
-        Order details
+        Chi tiết hoá đơn
       </Heading>
       {cart.items?.map((item) => <LineItem key={item.id} {...item} />)}
       <div className="h-px w-full bg-accent" />
@@ -21,12 +21,12 @@ export default function CartDetails({cart}: {cart: HttpTypes.StoreCart}) {
 
 export function CheckoutSummary({cart}: {cart: HttpTypes.StoreCart}) {
   const summaryItems = [
-    {amount: cart.subtotal, label: "Subtotal"},
-    {amount: cart.tax_total, label: "Taxes"},
-    {amount: cart.shipping_total, label: "Shipping"},
+    {amount: cart.subtotal, label: ""},
+    // {amount: cart.tax_total, label: "Thuế"},
+    {amount: cart.shipping_total, label: "Phí giao hàng"},
   ];
 
-  const total = {amount: cart.total, label: "Total", type: "total"};
+  const total = {amount: cart.total, label: "Tổng cộng", type: "total"};
 
   return (
     <>

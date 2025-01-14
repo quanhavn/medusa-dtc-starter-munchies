@@ -19,8 +19,9 @@ import {
 } from "react";
 
 import PaymentButton from "./button";
-import { isStripe as isStripeFunc } from "./utils";
+import { isPayOs, isStripe as isStripeFunc } from "./utils";
 import { StripeContext } from "./wrapper";
+import { useRouter } from "next/navigation";
 
 export default function Payment({
   active,
@@ -32,11 +33,12 @@ export default function Payment({
   cart: StoreCart;
   methods: StorePaymentProvider[];
   setStep: Dispatch<
-    SetStateAction<"addresses" | "delivery" | "payment" | "review">
+    SetStateAction<"addresses" | "delivery" | "payment" | "review" | "payos">
   >;
 }) {
   const [error, setError] = useState<null | string>(null);
   const [cardComplete, setCardComplete] = useState(false);
+  const router = useRouter();
 
   const activeSession = cart.payment_collection?.payment_sessions?.find(
     (paymentSession: any) => paymentSession.status === "pending",
@@ -62,21 +64,34 @@ export default function Payment({
   const [pending, startTransition] = useTransition();
 
   function initiatePayment() {
-    startTransition(() => {
-      action({
+    startTransition(async () => {
+      const result = await action({
         cart,
         data: {
           context: {},
           provider_id: selectedPaymentMethod,
         },
       });
+
+      console.log("initiatePayment result:-----------");
+      console.log(result);
+
+      // if (isPayOs(selectedPaymentMethod) && result.status === "success") {
+        // const checkoutUrl = result.data.payOSCheckoutData.checkoutUrl;
+        // router.push("https://tonie.hashnode.dev/implementing-a-custom-payment-gateway-integration-in-medusajs#heading-installing-packages-and-configuring-the-backend");
+      // }
     });
   }
 
+
   useEffect(() => {
-    if (status === "success") {
+    if (status === "success" && !isPayOs(selectedPaymentMethod)) {
       setStep("review");
       resetTransition(() => reset());
+    }
+    if (status === "success" && isPayOs(selectedPaymentMethod)) {
+      setStep("payos");
+      // resetTransition(() => reset());
     }
   }, [status, setStep, reset]);
 
@@ -91,19 +106,19 @@ export default function Payment({
     <div className="flex w-full flex-col gap-8 border-t border-accent py-8">
       <div className="flex items-center justify-between">
         <Heading desktopSize="xs" font="sans" mobileSize="xs" tag="h6">
-          Payment
+          Chọn phương thức thanh toán
         </Heading>
         {isFilled && (
           <Cta onClick={() => setStep("payment")} size="sm" variant="outline">
-            Edit
+            Chỉnh sửa
           </Cta>
         )}
       </div>
       {isFilled && (
         <div className="flex flex-1 flex-col gap-4">
-          <Body className="font-semibold" font="sans">
-            Method
-          </Body>
+          {/* <Body className="font-semibold" font="sans">
+            Phương thức thanh toán
+          </Body> */}
           <Body font="sans">{method.name}</Body>
         </div>
       )}
@@ -117,19 +132,19 @@ export default function Payment({
           {methods.map((item) => {
             return (
               <Item
-                className="flex w-full items-center justify-between gap-[10px] rounded-lg border-[1.5px] border-accent px-[32px] py-[19px] data-[state=checked]:bg-accent data-[state=checked]:text-background"
-                key={item.id}
-                value={item.id}
-              >
-                <div className="size-4 rounded-full border border-accent">
-                  <Indicator id={item.id}>
-                    <div className="size-4 rounded-full border-[4px] border-background" />
-                  </Indicator>
-                </div>
-                <div className="flex w-full items-center justify-between">
-                  <Body font="sans">{getMethodInfo(item.id).name}</Body>
-                </div>
-              </Item>
+              className="flex w-full items-center justify-between gap-[10px] rounded-lg border-[1.5px] border-accent px-[32px] py-[19px] data-[state=checked]:bg-accent data-[state=checked]:text-background"
+              key={item.id}
+              value={item.id}
+            >
+              <div className="size-4 rounded-full border border-accent">
+                <Indicator id={item.id}>
+                  <div className="size-4 rounded-full border-[4px] border-background" />
+                </Indicator>
+              </div>
+              <div className="flex w-full items-center justify-between">
+                <Body font="sans">{getMethodInfo(item.id).name}</Body>
+              </div>
+            </Item>
             );
           })}
           {isStripe && stripeReady && (
@@ -156,7 +171,7 @@ export default function Payment({
               size="sm"
               type="submit"
             >
-              {isStripe ? "Add card details" : "Continue to review"}
+              {isStripe ? "Add card details" : "Tiếp tục"}
             </Cta>
           )}
         </Root>
@@ -182,20 +197,25 @@ const stripeCardElementOptions: StripeCardElementOptions = {
 
 function getMethodInfo(id?: string) {
   switch (id) {
+    case "pp_payos_payos":
+      return {
+        id,
+        name: "Chuyển khoản",
+      };
     case "pp_system_default":
       return {
         id,
-        name: "Testing method",
+        name: "Thanh toán khi nhận hàng",
       };
-    case "pp_stripe_stripe":
-      return {
-        id,
-        name: "Stripe",
-      };
+    // case "pp_stripe_stripe":
+    //   return {
+    //     id,
+    //     name: "Stripe",
+    //   };
     default:
       return {
         id,
-        name: "Unknown",
+        name: "Thanh toán khi nhận hàng",
       };
   }
 }

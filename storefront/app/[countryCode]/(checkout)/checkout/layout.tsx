@@ -41,7 +41,7 @@ export default async function Layout(props: LayoutProps) {
           <LocalizedLink href="/" prefetch>
             <img
               alt="Bếp nhà Sun logo"
-              className="h-[22px] w-fit lg:h-8"
+              className="h-20 w-fit"
               src="/images/logo.png"
             />
           </LocalizedLink>

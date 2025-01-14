@@ -26,7 +26,7 @@ export default defineConfig({
         project_id: process.env.SANITY_PROJECT_ID,
         api_version: new Date().toISOString().split("T")[0],
         dataset: "production",
-        studio_url: "http://localhost:3333/cms",
+        studio_url: process.env.SANITY_STUDIO_URL,
         useCdn: false,
         type_map: {
           collection: "collection",
@@ -61,13 +61,22 @@ export default defineConfig({
       key: Modules.PAYMENT,
       options: {
         providers: [
+          // {
+          //   resolve: "@medusajs/medusa/payment-stripe",
+          //   id: "stripe",
+          //   options: {
+          //     apiKey: process.env.STRIPE_API_KEY,
+          //   },
+          // },
           {
-            resolve: "@medusajs/medusa/payment-stripe",
-            id: "stripe",
+            resolve: "src/modules/payos",
+            id: "payos",
             options: {
-              apiKey: process.env.STRIPE_API_KEY,
+              apiKey: process.env.PAYOS_API_KEY,
+              clientId: process.env.PAYOS_CLIENT_ID,
+              checksumKey: process.env.PAYOS_CHECKSUM_KEY,
             },
-          },
+          }
         ],
       },
     },

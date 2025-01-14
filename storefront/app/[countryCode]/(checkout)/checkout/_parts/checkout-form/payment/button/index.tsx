@@ -1,8 +1,9 @@
 import type {StoreCart} from "@medusajs/types";
 
-import {isManual, isStripe} from "../utils";
+import {isManual, isStripe, isPayOs} from "../utils";
 import ManualPaymentButton from "./manual";
 import StripePaymentButton from "./stripe";
+import PayOsPaymentButton from "./payos";
 
 type Props = {
   cart: StoreCart;
@@ -19,5 +20,9 @@ export default function PaymentButton({cart, disabled}: Props) {
 
   if (isManual(paymentSession?.provider_id)) {
     return <ManualPaymentButton notReady={Boolean(notReady)} />;
+  }
+
+  if (isPayOs(paymentSession?.provider_id)) {
+    return <PayOsPaymentButton cart={cart} notReady={Boolean(notReady)} />;
   }
 }

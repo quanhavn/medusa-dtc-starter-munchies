@@ -4,7 +4,7 @@ docker compose up -d
 ```
 
 ```
-cp backend/.env.template backend.env
+cp backend/.env.template backend/.env
 ```
 
 ```

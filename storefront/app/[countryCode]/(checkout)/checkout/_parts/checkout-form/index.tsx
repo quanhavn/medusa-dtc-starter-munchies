@@ -13,6 +13,7 @@ import Delivery from "./delivery";
 import Payment from "./payment";
 import StripeWrapper from "./payment/wrapper";
 import Review from "./review";
+import PayOS from "./payos";
 
 export default function CheckoutForm({
   cart,
@@ -24,7 +25,7 @@ export default function CheckoutForm({
   shippingMethods: StoreCartShippingOption[];
 }) {
   const [step, setStep] = useState<
-    "addresses" | "delivery" | "payment" | "review"
+    "addresses" | "delivery" | "payment" | "review" | "payos"
   >("addresses");
 
   return (
@@ -54,6 +55,7 @@ export default function CheckoutForm({
           methods={paymentMethods}
           setStep={setStep}
         />
+        <PayOS active={step === "payos"} cart={cart} />
         <Review active={step === "review"} cart={cart} />
       </div>
     </StripeWrapper>

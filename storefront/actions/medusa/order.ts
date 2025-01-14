@@ -36,9 +36,10 @@ export async function placeOrder() {
 
   if (cartRes?.type === "order") {
     await removeCartId();
-    const countryCode =
-      cartRes.order.shipping_address?.country_code?.toLowerCase();
-    redirect(`/${countryCode}/order/confirmed/${cartRes.order.id}`);
+    // const countryCode =
+    //   cartRes.order.shipping_address?.country_code?.toLowerCase();
+    // redirect(`/${countryCode}/order/confirmed/${cartRes.order.id}`);
+    redirect(`/order/confirmed/${cartRes.order.id}`);
   }
 
   return cartRes.cart;
@@ -82,12 +83,6 @@ export async function setCheckoutAddresses(
     const cartId = await getCartId();
     const customer = await getCustomer();
 
-    if (!customer) {
-      throw new Error("No existing customer found when setting addresses");
-    }
-    console.log(cartId)
-    console.log(customer)
-
     if (!cartId) {
       throw new Error("No existing cart found when setting addresses");
     }
@@ -103,7 +98,7 @@ export async function setCheckoutAddresses(
         country_code: formData.get("shipping_address.country_code"),
         first_name: formData.get("shipping_address.first_name"),
         last_name: formData.get("shipping_address.last_name"),
-        phone: formData.get("billing_address.phone"),
+        phone: formData.get("shipping_address.phone"),
         postal_code: formData.get("shipping_address.postal_code"),
         province: formData.get("shipping_address.province"),
       },
@@ -121,25 +116,31 @@ export async function setCheckoutAddresses(
     } as any;
     data.billing_address = data.shipping_address;
 
-    // console.log(data)
-
-    if (formData.get("billing_address.address_1")) {
-      data.billing_address = {
-        address_1: formData.get("billing_address.address_1"),
-        address_2: "",
-        city: formData.get("billing_address.city"),
-        company: formData.get("billing_address.company"),
-        country_code: formData.get("billing_address.country_code"),
-        first_name: formData.get("billing_address.first_name"),
-        last_name: formData.get("billing_address.last_name"),
-        phone: formData.get("billing_address.phone"),
-        postal_code: formData.get("billing_address.postal_code"),
-        province: formData.get("billing_address.province"),
-      };
-    }
+    // if (formData.get("billing_address.address_1")) {
+    //   data.billing_address = {
+    //     address_1: formData.get("billing_address.address_1"),
+    //     address_2: "",
+    //     city: formData.get("billing_address.city"),
+    //     company: formData.get("billing_address.company"),
+    //     country_code: formData.get("billing_address.country_code"),
+    //     first_name: formData.get("billing_address.first_name"),
+    //     last_name: formData.get("billing_address.last_name"),
+    //     phone: formData.get("billing_address.phone"),
+    //     postal_code: formData.get("billing_address.postal_code"),
+    //     province: formData.get("billing_address.province"),
+    //   };
+    // }
 
     await updateCart(data);
+    
+    // Fetch updated cart after update
+    const updatedCart = await medusa.store.cart.retrieve(
+      cartId,
+      {},
+      await getAuthHeaders()
+    );
 
+    revalidateTag(await getCacheTag("carts"));
     return {error: null, status: "success"};
   } catch (e: any) {
     return {error: e.message, status: "error"};

@@ -61,12 +61,12 @@ class PayOsProviderService extends AbstractPaymentProvider<Options> {
       context: customerDetails
     } = context
     console.log("Initiating payment with context: ", customerDetails)
-
+    const desc = customerDetails.session_id.replace("payses_01", "")
     try {
       const body = {
         orderCode: Number(String(Date.now()).slice(-6)),
         amount: Number(amount),
-        description: "Thanhtoan",
+        description: desc,
         returnUrl: "http://localhost:3000/checkout",
         cancelUrl: customerDetails.session_id,
       };
@@ -188,60 +188,70 @@ class PayOsProviderService extends AbstractPaymentProvider<Options> {
 
     try {
 
-      const data1 = {
-        code: "00",
-        desc: "success",
+      console.log("Getting webhook action and data with payload: ", payload)
+      console.log("Getting webhook action and data with data: ", data)
+
+      const data= {
+        code: '00',
+        desc: 'success',
         success: true,
         data: {
-          orderCode: 123,
-          amount: 3000,
-          description: "VQRIO123",
-          accountNumber: "12345678",
-          reference: "TF230204212323",
-          transactionDateTime: "2023-02-04 18:25:00",
-          currency: "VND",
-          paymentLinkId: "124c33293c43417ab7879e14c8d9eb18",
-          code: "00",
-          desc: "Thành công",
-          counterAccountBankId: "",
-          counterAccountBankName: "",
-          counterAccountName: "",
-          counterAccountNumber: "",
-          virtualAccountName: "",
-          virtualAccountNumber: "",
+          accountNumber: '8844043418',
+          amount: 6000,
+          description: 'CSU1ZPIH5Q7 JHNKY43AZ2NM65N1KRG0K3BZ',
+          reference: 'c60f5965-371e-4111-a237-9fc933f89af7',
+          transactionDateTime: '2025-01-16 01:35:13',
+          virtualAccountNumber: 'V3CAS8844043418',
+          counterAccountBankId: '',
+          counterAccountBankName: '',
+          counterAccountName: null,
+          counterAccountNumber: null,
+          virtualAccountName: '',
+          currency: 'VND',
+          orderCode: 82735,
+          paymentLinkId: 'a8893c40d2494c23b4cd7916f1488cf8',
+          code: '00',
+          desc: 'success'
         },
-        signature: "412e915d2871504ed31be63c8f62a149a4410d34c4c42affc9006ef9917eaa03",
-      };
+        signature: '52faeb2b7b80b4b4f6b68e141941c915e7f2ce64d9a835c8a0bff7cc6da44aa5'
+      }
+      const sessionId = `payses_01${data.data.description.split(" ").pop()}`
 
-      const isValid = await this.isValidData(data1.data, data1.signature, process.env.PAYOS_CHECKSUM_KEY);
+      console.log(sessionId);
+      
+      const isValid = await this.isValidData(data.data, data.signature, process.env.PAYOS_CHECKSUM_KEY);
       if (!isValid) {
+        console.log("payment failed. Trigger failed")
         return {
           action: "failed",
           data: {
-            session_id: (data.metadata as Record<string, any>).session_id,
-            amount: new BigNumber(data.amount as number)
+            session_id: sessionId,
+            amount: new BigNumber(data.data.amount as number)
           }
         }
       } else {
-        if (data1.success ) {
+        if (data.success ) {
+          console.log("payment success. Trigger Capture")
           return {
             action: "captured",
             data: {
-              session_id: (data.metadata as Record<string, any>).session_id,
-              amount: new BigNumber(data.amount as number)
+              session_id: sessionId,
+              amount: new BigNumber(data.data.amount as number)
             }
           }
         }
       }
+      console.log("payment not support. Trigger not_supported");
       return {
         action: "not_supported"
       }
     } catch (e) {
+      console.log("payment execption. Trigger failed")
       return {
         action: "failed",
         data: {
-          session_id: (data.metadata as Record<string, any>).session_id,
-          amount: new BigNumber(data.amount as number)
+          session_id: sessionId,
+          amount: new BigNumber(data.data.amount as number)
         }
       }
     }

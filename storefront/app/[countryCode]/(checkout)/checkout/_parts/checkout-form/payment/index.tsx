@@ -2,11 +2,13 @@
 import type { StoreCart, StorePaymentProvider } from "@medusajs/types";
 import type { StripeCardElementOptions } from "@stripe/stripe-js";
 
+import {placeOrder} from "@/actions/medusa/order";
 import { initiatePaymentSession } from "@/actions/medusa/order";
 import { Cta } from "@/components/shared/button";
 import Body from "@/components/shared/typography/body";
 import Heading from "@/components/shared/typography/heading";
 import { useResetableActionState } from "@/hooks/use-resetable-action-state";
+import { usePayOS } from "@payos/payos-checkout";
 import { Indicator, Item, Root } from "@radix-ui/react-radio-group";
 import { CardElement } from "@stripe/react-stripe-js";
 import {
@@ -14,14 +16,14 @@ import {
     type SetStateAction,
     useContext,
     useEffect,
+    useRef,
     useState,
     useTransition,
 } from "react";
 
-import PaymentButton from "./button";
-import { isPayOs, isStripe as isStripeFunc } from "./utils";
+// import PaymentButton from "./button";
+import { isManual, isPayOs, isStripe as isStripeFunc } from "./utils";
 import { StripeContext } from "./wrapper";
-import { useRouter } from "next/navigation";
 
 export default function Payment({
   active,
@@ -33,12 +35,13 @@ export default function Payment({
   cart: StoreCart;
   methods: StorePaymentProvider[];
   setStep: Dispatch<
-    SetStateAction<"addresses" | "delivery" | "payment" | "review" | "payos">
+    SetStateAction<"addresses" | "delivery" | "payment" | "payos" | "review">
   >;
 }) {
   const [error, setError] = useState<null | string>(null);
-  const [cardComplete, setCardComplete] = useState(false);
-  const router = useRouter();
+  const [, setCardComplete] = useState(false); 
+  const [isOpen, setIsOpen] = useState(false);
+  const [isPlacingOrder, setIsPlacingOrder] = useState(false);
 
   const activeSession = cart.payment_collection?.payment_sessions?.find(
     (paymentSession: any) => paymentSession.status === "pending",
@@ -49,7 +52,6 @@ export default function Payment({
   );
 
   const [, resetTransition] = useTransition();
-
 
   const isStripe = isStripeFunc(selectedPaymentMethod);
   const stripeReady = useContext(StripeContext);
@@ -62,38 +64,106 @@ export default function Payment({
     },
   );
   const [pending, startTransition] = useTransition();
+  const [payOSConfig, setPayOSConfig] = useState({
+    CHECKOUT_URL: "",
+    ELEMENT_ID: "embedded-payment-container",
+    RETURN_URL: process.env.NEXT_PUBLIC_CHECKOUT_URL, 
+    embedded: true,
+    onSuccess: async () => {
+      setIsPlacingOrder(true);
+      try {
+        await placeOrder();
+      } finally {
+        setIsPlacingOrder(false);
+      }
+    },
+  });
+
+  const paymentContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setPayOSConfig(prev => ({
+      ...prev,
+      CHECKOUT_URL: "",
+    }));
+    setIsOpen(false);
+  }, [selectedPaymentMethod]);
+
+  // Handle PayOS session
+  useEffect(() => {
+    if (status === "success" && isPayOs(selectedPaymentMethod)) {
+      const payOsSession = activeSession;
+      
+      if (payOsSession?.data?.payOSCheckoutData) {
+        const checkoutData = payOsSession.data.payOSCheckoutData as { checkoutUrl: string };
+        // Only update if we have a new URL
+        if (checkoutData.checkoutUrl && checkoutData.checkoutUrl !== payOSConfig.CHECKOUT_URL) {
+          setPayOSConfig((oldConfig) => ({
+            ...oldConfig,
+            CHECKOUT_URL: checkoutData.checkoutUrl,
+          }));
+          setIsOpen(true);
+        }
+      }
+    }
+  }, [status, selectedPaymentMethod, activeSession]);
+  // Only call usePayOS when CHECKOUT_URL is available
+  const { open } = usePayOS({
+    ...payOSConfig,
+    RETURN_URL: payOSConfig.RETURN_URL || '' // Provide default empty string
+  });
 
   function initiatePayment() {
     startTransition(async () => {
-      const result = await action({
+      await action({
         cart,
         data: {
           context: {},
           provider_id: selectedPaymentMethod,
         },
       });
-
-      console.log("initiatePayment result:-----------");
-      console.log(result);
-
-      // if (isPayOs(selectedPaymentMethod) && result.status === "success") {
-        // const checkoutUrl = result.data.payOSCheckoutData.checkoutUrl;
-        // router.push("https://tonie.hashnode.dev/implementing-a-custom-payment-gateway-integration-in-medusajs#heading-installing-packages-and-configuring-the-backend");
-      // }
     });
   }
 
+  useEffect(() => {
+    if (status === "success") {
+      if (isManual(selectedPaymentMethod)) {
+        setStep("review");
+        resetTransition(() => reset());
+      } else if (isPayOs(selectedPaymentMethod)) {
+        const payOsSession = activeSession;
+        
+        if (payOsSession?.data?.payOSCheckoutData) {
+          const checkoutData = payOsSession.data.payOSCheckoutData as { checkoutUrl: string };
+
+          console.log(`checkoutData.checkoutUrl: ${checkoutData.checkoutUrl}`)
+          console.log(`payOSConfig.CHECKOUT_URL: ${payOSConfig.CHECKOUT_URL}`)
+          if (payOSConfig.CHECKOUT_URL !== checkoutData.checkoutUrl) {
+            setPayOSConfig((oldConfig) => ({
+              ...oldConfig,
+              CHECKOUT_URL: checkoutData.checkoutUrl,
+            }));
+            setIsOpen(true);
+          }
+        }
+      }
+    }
+  }, [status, setStep, reset, selectedPaymentMethod, activeSession]);
 
   useEffect(() => {
-    if (status === "success" && !isPayOs(selectedPaymentMethod)) {
-      setStep("review");
-      resetTransition(() => reset());
+    if (payOSConfig.CHECKOUT_URL && isOpen) {
+      open();
     }
-    if (status === "success" && isPayOs(selectedPaymentMethod)) {
-      setStep("payos");
-      // resetTransition(() => reset());
+  }, [payOSConfig.CHECKOUT_URL, isOpen]);
+
+  useEffect(() => {
+    if (isOpen && paymentContainerRef.current) {
+      paymentContainerRef.current.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'center'
+      });
     }
-  }, [status, setStep, reset]);
+  }, [isOpen]);
 
   const activeMethod = methods.find(
     ({id}) => id === activeSession?.provider_id,
@@ -147,6 +217,21 @@ export default function Payment({
             </Item>
             );
           })}
+          {isPayOs(selectedPaymentMethod) && isOpen && (
+            <>
+              <div className="w-full">
+                <div className="mb-4 text-sm">
+                  Sau khi thực hiện thanh toán thành công, vui lòng đợi từ 5 - 10s để
+                  hệ thống tự động cập nhật.
+                </div>
+              </div>
+              <div
+                className="h-[400px]"
+                id="embedded-payment-container"
+                ref={paymentContainerRef}
+              />
+            </>
+          )}
           {isStripe && stripeReady && (
             <div className="mt-5 flex flex-col gap-2 transition-all duration-150 ease-in-out">
               <Body font="sans">Enter your card details:</Body>
@@ -162,9 +247,7 @@ export default function Payment({
             </div>
           )}
 
-          {isStripe && stripeReady ? (
-            <PaymentButton cart={cart} disabled={!cardComplete} />
-          ) : (
+          {!isOpen && (
             <Cta
               loading={pending}
               onClick={initiatePayment}
@@ -175,6 +258,14 @@ export default function Payment({
             </Cta>
           )}
         </Root>
+      )}
+      {isPlacingOrder && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="flex flex-col items-center gap-4 rounded-lg bg-white p-6">
+            <div className="h-8 w-8 animate-spin rounded-full border-4 border-accent border-t-transparent"></div>
+            <p className="text-sm">Đang xử lý đơn hàng...</p>
+          </div>
+        </div>
       )}
     </div>
   );

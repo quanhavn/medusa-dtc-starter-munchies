@@ -11,9 +11,9 @@ import {useState} from "react";
 import AddressForm from "./address-form";
 import Delivery from "./delivery";
 import Payment from "./payment";
-import StripeWrapper from "./payment/wrapper";
-import Review from "./review";
 import PayOS from "./payos";
+// import StripeWrapper from "./payment/wrapper";
+import Review from "./review";
 
 export default function CheckoutForm({
   cart,
@@ -25,11 +25,11 @@ export default function CheckoutForm({
   shippingMethods: StoreCartShippingOption[];
 }) {
   const [step, setStep] = useState<
-    "addresses" | "delivery" | "payment" | "review" | "payos"
+    "addresses" | "delivery" | "payment" | "payos" | "review"
   >("addresses");
 
   return (
-    <StripeWrapper cart={cart}>
+    // <StripeWrapper cart={cart}>
       <div className="w-full">
         <Heading desktopSize="2xl" font="serif" mobileSize="xl" tag="h3">
           Thanh toán
@@ -58,6 +58,6 @@ export default function CheckoutForm({
         <PayOS active={step === "payos"} cart={cart} />
         <Review active={step === "review"} cart={cart} />
       </div>
-    </StripeWrapper>
+    // </StripeWrapper>
   );
 }

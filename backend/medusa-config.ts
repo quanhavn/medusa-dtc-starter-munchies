@@ -27,7 +27,7 @@ export default defineConfig({
         api_version: new Date().toISOString().split("T")[0],
         dataset: "production",
         studio_url: process.env.SANITY_STUDIO_URL,
-        useCdn: false,
+        // useCdn: false,
         type_map: {
           collection: "collection",
           category: "category",

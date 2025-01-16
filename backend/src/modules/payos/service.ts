@@ -11,30 +11,33 @@ type Options = {
 }
 
 class PayOsProviderService extends AbstractPaymentProvider<Options> {
-  // async cancelPayment(paymentData: Record<string, unknown>): Promise<PaymentProviderError | PaymentProviderSessionResponse["data"]> {
-  //   console.log("Cancelling payment with paymentData: ", paymentData)
-  //   return {}
-  // }
-  // async refundPayment(paymentData: Record<string, unknown>, refundAmount: number): Promise<PaymentProviderError | PaymentProviderSessionResponse["data"]> {
-  //   console.log("refundPayment payment with paymentData: ", paymentData)
-  //   return {}
-  // }
-  // async retrievePayment(paymentSessionData: Record<string, unknown>): Promise<PaymentProviderError | PaymentProviderSessionResponse["data"]> {
-  //   console.log("retrievePayment payment with paymentData: ", paymentSessionData)
-  //   return {}
-  // }
-  // async updatePayment(context: UpdatePaymentProviderSession): Promise<PaymentProviderError | PaymentProviderSessionResponse> {
-  //   console.log("updatePayment payment with paymentData: ", context)
-  //   return {
-  //     data: {},
-  //   }
-  // }
-  // async getWebhookActionAndData(data: ProviderWebhookPayload["payload"]): Promise<WebhookActionResult> {
-  //   console.log("getWebhookActionAndData payment with paymentData: ", data)
-  //   return {
-  //     action: "not_supported"
-  //   }
-  // }
+  async getWebhookActionAndData(data: ProviderWebhookPayload["payload"]): Promise<WebhookActionResult> {
+    return {
+      action: "not_supported"
+    }
+  }
+
+  async cancelPayment(paymentData: Record<string, unknown>): Promise<PaymentProviderError | PaymentProviderSessionResponse["data"]> {
+    console.log("Cancelling payment with paymentData: ", paymentData)
+    return {}
+  }
+
+  async refundPayment(paymentData: Record<string, unknown>, refundAmount: number): Promise<PaymentProviderError | PaymentProviderSessionResponse["data"]> {
+    console.log("refundPayment payment with paymentData: ", paymentData)
+    return {}
+  }
+
+  async retrievePayment(paymentSessionData: Record<string, unknown>): Promise<PaymentProviderError | PaymentProviderSessionResponse["data"]> {
+    console.log("retrievePayment payment with paymentData: ", paymentSessionData)
+    return {}
+  }
+
+  async updatePayment(context: UpdatePaymentProviderSession): Promise<PaymentProviderError | PaymentProviderSessionResponse> {
+    console.log("updatePayment payment with paymentData: ", context)
+    return {
+      data: {},
+    }
+  }
 
   static identifier = "payos"
   protected client: PayOS
@@ -67,7 +70,7 @@ class PayOsProviderService extends AbstractPaymentProvider<Options> {
         orderCode: Number(String(Date.now()).slice(-6)),
         amount: Number(amount),
         description: desc,
-        returnUrl: "http://localhost:3000/checkout",
+        returnUrl: process.env.CHECKOUT_URL,
         cancelUrl: customerDetails.session_id,
       };
       const payOSCheckoutData = await this.client.createPaymentLink(body);
@@ -111,12 +114,12 @@ class PayOsProviderService extends AbstractPaymentProvider<Options> {
   async getPaymentStatus(
         paymentSessionData: Record<string, unknown>
       ): Promise<PaymentSessionStatus> {
-        const externalId = String(paymentSessionData.id)
-        console.log("Getting payment status with external id: ", externalId)
-    
+        const payOSData = paymentSessionData.payOSCheckoutData as { paymentLinkId: string } | undefined
+        const paymentLinkId = payOSData?.paymentLinkId
+
+        console.log("Getting payment status with paymentLinkId: ", paymentLinkId)
         try {
-          // assuming you have a client that retrieves the payment status
-          const paymentData = await this.client.getPaymentLinkInformation(externalId)
+          const paymentData = await this.client.getPaymentLinkInformation(paymentLinkId)
     
           switch (paymentData.status) {
             // case "requires_capture":
@@ -143,8 +146,6 @@ class PayOsProviderService extends AbstractPaymentProvider<Options> {
     console.log("Capturing payment with external data: ", paymentData)
 
     try {
-      // assuming you have a client that captures the payment
-      // const newData = await this.client.capturePayment(externalId)
       const newData = []
 
       return {
@@ -177,85 +178,85 @@ class PayOsProviderService extends AbstractPaymentProvider<Options> {
     }
   }
 
-  async getWebhookActionAndData(
-    payload: ProviderWebhookPayload["payload"]
-  ): Promise<WebhookActionResult> {
-    const {
-      data,
-      rawData,
-      headers
-    } = payload
+  // async getWebhookActionAndData(
+  //   payload: ProviderWebhookPayload["payload"]
+  // ): Promise<WebhookActionResult> {
+  //   const {
+  //     data,
+  //     rawData,
+  //     headers
+  //   } = payload
 
-    try {
+  //   try {
 
-      console.log("Getting webhook action and data with payload: ", payload)
-      console.log("Getting webhook action and data with data: ", data)
+  //     // console.log("Getting webhook action and data with payload: ", payload)
+  //     // console.log("Getting webhook action and data with data: ", data)
 
-      const data= {
-        code: '00',
-        desc: 'success',
-        success: true,
-        data: {
-          accountNumber: '8844043418',
-          amount: 6000,
-          description: 'CSU1ZPIH5Q7 JHNKY43AZ2NM65N1KRG0K3BZ',
-          reference: 'c60f5965-371e-4111-a237-9fc933f89af7',
-          transactionDateTime: '2025-01-16 01:35:13',
-          virtualAccountNumber: 'V3CAS8844043418',
-          counterAccountBankId: '',
-          counterAccountBankName: '',
-          counterAccountName: null,
-          counterAccountNumber: null,
-          virtualAccountName: '',
-          currency: 'VND',
-          orderCode: 82735,
-          paymentLinkId: 'a8893c40d2494c23b4cd7916f1488cf8',
-          code: '00',
-          desc: 'success'
-        },
-        signature: '52faeb2b7b80b4b4f6b68e141941c915e7f2ce64d9a835c8a0bff7cc6da44aa5'
-      }
-      const sessionId = `payses_01${data.data.description.split(" ").pop()}`
+  //     const data = {
+  //       code: '00',
+  //       desc: 'success',
+  //       success: true,
+  //       data: {
+  //         accountNumber: '8844043418',
+  //         amount: 6000,
+  //         description: 'CSU1ZPIH5Q7 JHNKY43AZ2NM65N1KRG0K3BZ',
+  //         reference: 'c60f5965-371e-4111-a237-9fc933f89af7',
+  //         transactionDateTime: '2025-01-16 01:35:13',
+  //         virtualAccountNumber: 'V3CAS8844043418',
+  //         counterAccountBankId: '',
+  //         counterAccountBankName: '',
+  //         counterAccountName: null,
+  //         counterAccountNumber: null,
+  //         virtualAccountName: '',
+  //         currency: 'VND',
+  //         orderCode: 82735,
+  //         paymentLinkId: 'a8893c40d2494c23b4cd7916f1488cf8',
+  //         code: '00',
+  //         desc: 'success'
+  //       },
+  //       signature: '52faeb2b7b80b4b4f6b68e141941c915e7f2ce64d9a835c8a0bff7cc6da44aa5'
+  //     }
+  //     const sessionId = `payses_01${data.data.description.split(" ").pop()}`
 
-      console.log(sessionId);
+  //     // console.log(sessionId);
       
-      const isValid = await this.isValidData(data.data, data.signature, process.env.PAYOS_CHECKSUM_KEY);
-      if (!isValid) {
-        console.log("payment failed. Trigger failed")
-        return {
-          action: "failed",
-          data: {
-            session_id: sessionId,
-            amount: new BigNumber(data.data.amount as number)
-          }
-        }
-      } else {
-        if (data.success ) {
-          console.log("payment success. Trigger Capture")
-          return {
-            action: "captured",
-            data: {
-              session_id: sessionId,
-              amount: new BigNumber(data.data.amount as number)
-            }
-          }
-        }
-      }
-      console.log("payment not support. Trigger not_supported");
-      return {
-        action: "not_supported"
-      }
-    } catch (e) {
-      console.log("payment execption. Trigger failed")
-      return {
-        action: "failed",
-        data: {
-          session_id: sessionId,
-          amount: new BigNumber(data.data.amount as number)
-        }
-      }
-    }
-  }
+  //     const isValid = await this.isValidData(data.data, data.signature, process.env.PAYOS_CHECKSUM_KEY);
+  //     if (!isValid) {
+  //       console.log("payment failed. Trigger failed")
+  //       return {
+  //         action: "failed",
+  //         data: {
+  //           session_id: sessionId,
+  //           amount: new BigNumber(data.data.amount as number)
+  //         }
+  //       }
+  //     } else {
+  //       if (data.success ) {
+  //         console.log("payment success. Trigger Capture")
+  //         return {
+  //           action: "captured",
+  //           data: {
+  //             session_id: sessionId,
+  //             amount: new BigNumber(data.data.amount as number)
+  //           }
+  //         }
+  //       }
+  //     }
+  //     console.log("payment not support. Trigger not_supported");
+  //     return {
+  //       action: "not_supported"
+  //     }
+  //   } catch (e) {
+  //     console.log("payment execption. Trigger failed")
+  //     return {
+  //       action: "failed",
+  //       data: {
+  //         session_id: "unknown",
+  //         amount: new BigNumber(0)
+  //       }
+  //     }
+  //   }
+  // }
 
   async sortObjDataByKey(object) {
     const orderedObject = Object.keys(object)

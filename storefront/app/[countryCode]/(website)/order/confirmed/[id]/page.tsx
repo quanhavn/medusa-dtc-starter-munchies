@@ -38,10 +38,10 @@ export default async function OrderConfirmedPage(props: PageProps<"id">) {
           className="mb-lg"
           desktopSize="2xl"
           font="serif"
-          mobileSize="lg"
+          mobileSize="sm"
           tag="h1"
         >
-          Cảm ơn bạn! Đơn hàng của bạn đã được đặt thành công
+          Cảm ơn bạn đã ủng hộ chúng mình
         </Heading>
 
         {/* <Body className="font-medium" desktopSize="xl" font="sans">
@@ -61,7 +61,7 @@ export default async function OrderConfirmedPage(props: PageProps<"id">) {
         </Body>
       </div>
       <div className="flex flex-col gap-s">
-        <Heading desktopSize="xl" font="serif" mobileSize="lg" tag="h2">
+        <Heading desktopSize="xl" font="serif" mobileSize="xs" tag="h2">
           Chi tiết đơn hàng
         </Heading>
         <div className="flex flex-col gap-s">
@@ -86,10 +86,10 @@ export default async function OrderConfirmedPage(props: PageProps<"id">) {
           />
           <Separator />
           <div className="flex justify-between">
-            <Heading desktopSize="base" font="sans" mobileSize="sm" tag="h4">
+            <Heading desktopSize="base" font="sans" mobileSize="xs" tag="h4">
               Tổng cộng
             </Heading>
-            <Heading desktopSize="base" font="sans" mobileSize="sm" tag="h4">
+            <Heading desktopSize="base" font="sans" mobileSize="xs" tag="h4">
               {convertMoney(order.total)}
             </Heading>
           </div>
@@ -97,7 +97,7 @@ export default async function OrderConfirmedPage(props: PageProps<"id">) {
         </div>
       </div>
       <div className="flex flex-col gap-s">
-        <Heading desktopSize="xl" font="serif" mobileSize="lg" tag="h2">
+        <Heading desktopSize="xl" font="serif" mobileSize="xs" tag="h2">
           Thông tin giao hàng
         </Heading>
         <div className="flex flex-col gap-xl lg:flex-row lg:gap-s">

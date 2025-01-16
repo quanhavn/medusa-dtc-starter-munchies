@@ -23,7 +23,7 @@ export default function Review({
       </Heading>
       <>
         <Body>
-          Bằng cách nhấn 'Hoàn tất đơn hàng', bạn xác nhận rằng bạn đã
+          Bằng cách nhấn Hoàn tất đơn hàng, bạn xác nhận rằng bạn đã
           đọc, hiểu và chấp nhận điều khoản Bán hàng và
           Chính sách Đổi trả của chúng mình - Bếp nhà Sun.
         </Body>

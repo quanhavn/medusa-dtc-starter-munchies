@@ -5,7 +5,7 @@ import LocalizedLink from "@/components/shared/localized-link";
 import {Suspense} from "react";
 
 import Cart from "./cart";
-import {CountrySelector} from "./country-selector";
+// import {CountrySelector} from "./country-selector";
 import AnnouncementBar from "./parts/announcement-bar";
 import BottomBorder from "./parts/bottom-border";
 import HamburgerContainer from "./parts/hamburger/container";

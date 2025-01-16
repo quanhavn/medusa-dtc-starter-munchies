@@ -1,6 +1,6 @@
 "use client";
 import type {StoreCart, StoreCartAddress} from "@medusajs/types";
-import type {BaseRegionCountry} from "@medusajs/types/dist/http/region/common";
+// import type {BaseRegionCountry} from "@medusajs/types/dist/http/region/common";
 import type {Dispatch, SetStateAction} from "react";
 
 import {setCheckoutAddresses} from "@/actions/medusa/order";
@@ -11,10 +11,8 @@ import Input from "@/components/shared/input";
 import Body from "@/components/shared/typography/body";
 import Heading from "@/components/shared/typography/heading";
 import {useResetableActionState} from "@/hooks/use-resetable-action-state";
-import {useEffect, useState, useTransition} from "react";
+import {useEffect, useTransition} from "react";
 import {useFormStatus} from "react-dom";
-import { getAuthHeaders, getCartId } from "@/data/medusa/cookies";
-import medusa from "@/data/medusa/client";
 
 export default function AddressForm({
   active,
@@ -25,9 +23,9 @@ export default function AddressForm({
 }: {
   active: boolean;
   cart: StoreCart;
-  nextStep: "addresses" | "delivery" | "payment" | "review" | "payos";
+  nextStep: "addresses" | "delivery" | "payment" | "payos" | "review";
   setStep: Dispatch<
-    SetStateAction<"addresses" | "delivery" | "payment" | "review" | "payos">
+    SetStateAction<"addresses" | "delivery" | "payment" | "payos" | "review">
   >;
   // setCart: (cart: StoreCart) => void; // Add this type
 }) {
@@ -107,7 +105,7 @@ export default function AddressForm({
             <AddressInputs
               address={cart.shipping_address}
               addressName="shipping_address"
-              countries={cart.region?.countries}
+              // countries={cart.region?.countries}
             />
           </div>
           {/* <Checkbox
@@ -170,13 +168,14 @@ function SubmitButton() {
 function AddressInputs({
   address,
   addressName,
-  countries,
+  // countries,
 }: {
   address?: StoreCartAddress;
   addressName: string;
-  countries?: BaseRegionCountry[];
+  // countries?: BaseRegionCountry[];
 }) {
   const inputName = (name: string) => addressName + "." + name;
+  
 
   return (
     <>

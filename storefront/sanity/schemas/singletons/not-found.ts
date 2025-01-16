@@ -1,5 +1,6 @@
-import definePage from "../../helpers/define-page";
 import {AccessDeniedIcon} from "@sanity/icons";
+
+import definePage from "../../helpers/define-page";
 
 export const notFound = definePage({
   __experimental_formPreviewTitle: false,

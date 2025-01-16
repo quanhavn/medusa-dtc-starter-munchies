@@ -1,26 +1,26 @@
 import {cx} from "cva";
 import {
-  Climate_Crisis,
-  Instrument_Sans,
-  Instrument_Serif,
-  Braah_One
+  Lexend,
+  // Climate_Crisis,
+  // Instrument_Sans,
+  // Instrument_Serif
 } from "next/font/google";
 
 import dynamicFavicon from "./dynamic-favicon";
 import "./globals.css";
 
-const instrumentSans = Braah_One({
-  // subsets: ["latin"],
+const instrumentSans = Lexend({
+  subsets: ["vietnamese"],
   variable: "--font-instrumentSans",
   weight: ["400"],
 });
-const instrumentSerif = Braah_One({
-  // subsets: ["latin"],
+const instrumentSerif = Lexend({
+  subsets: ["vietnamese"],
   variable: "--font-instrumentSerif",
   weight: ["400"],
 });
-const climateCrisis = Braah_One({
-  // subsets: ["latin"],
+const climateCrisis = Lexend({
+  subsets: ["vietnamese"],
   variable: "--font-climateCrisis",
   weight: ["400"],
 });

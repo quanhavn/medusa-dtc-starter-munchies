@@ -1,11 +1,11 @@
-import config from "./config";
 import {visionTool} from "@sanity/vision";
 import {pages} from "@tinloof/sanity-studio";
-import {defineConfig, isDev} from "sanity";
+import {defineConfig, isDev, SchemaTypeDefinition} from "sanity";
 import {structureTool} from "sanity/structure";
 import {imageHotspotArrayPlugin} from "sanity-plugin-hotspot-array";
 
 import {StudioLogo} from "./components/studio/logo";
+import config from "./config";
 import schemas from "./sanity/schemas";
 import {
   defaultDocumentNode,
@@ -55,7 +55,7 @@ export default defineConfig({
         (template) =>
           !disableCreationDocumentTypes?.includes(template.schemaType),
       ),
-    types: schemas,
+    types: schemas as SchemaTypeDefinition[],
   },
   title: config.siteName,
 });

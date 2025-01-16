@@ -1,5 +1,6 @@
-import definePage from "../../helpers/define-page";
 import {DocumentTextIcon} from "@sanity/icons";
+
+import definePage from "../../helpers/define-page";
 
 export const textPage = definePage({
   fields: [

@@ -11,9 +11,6 @@ export default defineType({
     },
   ],
   name: "category",
-  options: {
-    disableCreation: true,
-  },
   preview: {
     select: {
       title: "internalTitle",

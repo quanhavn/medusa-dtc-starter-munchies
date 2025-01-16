@@ -3,6 +3,7 @@ import type {Product} from "@/types/sanity.generated";
 import {AddonsItem} from "@/components/shared/addons-item";
 import Heading from "@/components/shared/typography/heading";
 import {getProductsByIds} from "@/data/medusa/products";
+import { StoreProduct } from "@medusajs/types";
 
 export default async function Addons({
   products: productRefs,
@@ -22,7 +23,7 @@ export default async function Addons({
       <Heading desktopSize="lg" mobileSize="base" tag={"h4"}>
         {title}
       </Heading>
-      {products.map((product) => (
+      {products.map((product: StoreProduct) => (
         <AddonsItem key={product.id} region_id={region_id} {...product} />
       ))}
     </div>

@@ -12,15 +12,15 @@ export const runtime = "edge";
 export async function GET(_: NextRequest, props: PageProps<"...info">) {
   const params = await props.params;
   const instrumentSerif = await fetch(
-    new URL("../../../fonts/InstrumentSerif-Regular.ttf", import.meta.url),
+    `file://${process.cwd()}/app/fonts/InstrumentSerif-Regular.ttf`
   ).then((res) => res.arrayBuffer());
 
   const instrumentSans = await fetch(
-    new URL("../../../fonts/InstrumentSans-Medium.ttf", import.meta.url),
+    `file://${process.cwd()}/app/fonts/InstrumentSans-Medium.ttf`
   ).then((res) => res.arrayBuffer());
 
   const climateCrisis = await fetch(
-    new URL("../../../fonts/ClimateCrisis-Regular.ttf", import.meta.url),
+    `file://${process.cwd()}/app/fonts/ClimateCrisis-Regular.ttf`
   ).then((res) => res.arrayBuffer());
 
   try {

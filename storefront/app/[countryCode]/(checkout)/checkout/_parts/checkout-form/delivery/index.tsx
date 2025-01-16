@@ -24,7 +24,7 @@ export default function Delivery({
   currency_code: string;
   methods: StoreCartShippingOption[];
   setStep: Dispatch<
-    SetStateAction<"addresses" | "delivery" | "payment" | "review" | "payos">
+    SetStateAction<"addresses" | "delivery" | "payment" | "payos" | "review">
   >;
 }) {
   const [, startTransition] = useTransition();

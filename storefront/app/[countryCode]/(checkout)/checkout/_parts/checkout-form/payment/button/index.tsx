@@ -1,9 +1,9 @@
 import type {StoreCart} from "@medusajs/types";
 
-import {isManual, isStripe, isPayOs} from "../utils";
+import {isManual, isPayOs, isStripe} from "../utils";
 import ManualPaymentButton from "./manual";
-import StripePaymentButton from "./stripe";
 import PayOsPaymentButton from "./payos";
+import StripePaymentButton from "./stripe";
 
 type Props = {
   cart: StoreCart;

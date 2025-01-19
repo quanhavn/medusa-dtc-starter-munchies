@@ -2,15 +2,16 @@
 import type {Footer} from "@/types/sanity.generated";
 
 import {newsletterForm} from "@/actions/newsletter";
-import {Cta} from "@/components/shared/button";
+// import {Cta} from "@/components/shared/button";
 import {RichText} from "@/components/shared/rich-text";
 import Body from "@/components/shared/typography/body";
 import Heading from "@/components/shared/typography/heading";
 import {useActionState} from "react";
-import {useFormStatus} from "react-dom";
+// import {useFormStatus} from "react-dom";
 
 export default function Newsletter(props: NonNullable<Footer>) {
-  const [state, action] = useActionState(newsletterForm, "idle");
+  const [state, ] = useActionState(newsletterForm, "idle");
+  // const [state, action] = useActionState(newsletterForm, "idle");
 
   return (
     <section className="mx-auto flex w-full max-w-max-screen flex-col gap-s px-m py-2xl lg:px-xl">
@@ -55,18 +56,18 @@ export default function Newsletter(props: NonNullable<Footer>) {
   );
 }
 
-function SubmitButton({text}: {text?: string}) {
-  const {pending} = useFormStatus();
+// function SubmitButton({text}: {text?: string}) {
+//   const {pending} = useFormStatus();
 
-  return (
-    <Cta
-      className="w-full lg:flex-1"
-      loading={pending}
-      size="xl"
-      type="submit"
-      variant="outline"
-    >
-      {text || "Submit"}
-    </Cta>
-  );
-}
+//   return (
+//     <Cta
+//       className="w-full lg:flex-1"
+//       loading={pending}
+//       size="xl"
+//       type="submit"
+//       variant="outline"
+//     >
+//       {text || "Submit"}
+//     </Cta>
+//   );
+// }

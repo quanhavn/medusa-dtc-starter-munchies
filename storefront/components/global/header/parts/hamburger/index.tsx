@@ -86,9 +86,9 @@ export default function Hamburger({
                   />
                 ))}
               </div>
-              {/* <div className="p-m">
+              <div className="p-m">
                 <CountrySelectorDialog countries={countries} />
-              </div> */}
+              </div>
             </div>
             <div
               className={`scrollbar-hide fixed left-0 top-[calc(var(--header-height))] h-[calc(100dvh-var(--header-height))] w-screen transform overflow-x-hidden overflow-y-scroll bg-background transition-all duration-300 ${

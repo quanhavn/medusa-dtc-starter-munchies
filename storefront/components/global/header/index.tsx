@@ -22,7 +22,7 @@ export default function Header(props: {countryCode: string} & Header) {
             <LocalizedLink href="/" prefetch>
               <img
                 alt="Bếp nhà Sun logo"
-                className="my-[9px] h-16 w-fit lg:my-[10px] lg:h-20"
+                className="my-[9px] h-16 lg:my-[10px] lg:h-20"
                 src="/images/logo.png"
               />
             </LocalizedLink>

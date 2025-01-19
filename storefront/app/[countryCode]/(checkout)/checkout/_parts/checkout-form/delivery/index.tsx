@@ -61,19 +61,19 @@ export default function Delivery({
     <div className="flex w-full flex-col gap-8 border-t border-accent py-8">
       <div className="flex items-center justify-between">
         <Heading desktopSize="xs" font="sans" mobileSize="xs" tag="h6">
-          Delivery
+          Chọn hình thức nhận hàng
         </Heading>
         {isFilled && (
           <Cta onClick={() => setStep("delivery")} size="sm" variant="outline">
-            Edit
+            Chỉnh sửa
           </Cta>
         )}
       </div>
       {isFilled && (
         <div className="flex flex-1 flex-col gap-4">
-          <Body className="font-semibold" font="sans">
-            Method
-          </Body>
+          {/* <Body className="font-semibold" font="sans">
+            Phương thức
+          </Body> */}
           <Body font="sans">
             {activeShippingMethod.name} ({activeShippingMethodPrice})
           </Body>
@@ -123,7 +123,7 @@ function SubmitButton() {
   const {pending} = useFormStatus();
   return (
     <Cta loading={pending} size="sm" type="submit">
-      Continue to payment
+      Tiếp tục
     </Cta>
   );
 }

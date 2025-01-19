@@ -20,8 +20,8 @@ export default async function CartAddons({ids, isEmptyCart, region_id}: Props) {
         showButtons
         slides={slides}
         title={
-          <Heading font="serif" mobileSize="lg" tag="h3">
-            {isEmptyCart ? "You might like" : "You might also like"}
+          <Heading font="serif" mobileSize="sm" tag="h3">
+            {isEmptyCart ? "Có thể bạn sẽ thích" : "Có thể bạn sẽ thích"}
           </Heading>
         }
         variant="cart"

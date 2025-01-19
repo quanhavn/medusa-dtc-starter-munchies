@@ -23,9 +23,8 @@ export default function Review({
       </Heading>
       <>
         <Body>
-          Bằng cách nhấn Hoàn tất đơn hàng, bạn xác nhận rằng bạn đã
-          đọc, hiểu và chấp nhận điều khoản Bán hàng và
-          Chính sách Đổi trả của chúng mình - Bếp nhà Sun.
+          Vui lòng kiểm tra lại và xác nhận các thông tin trên là chính xác.
+          Bếp sẽ liên hệ với bạn ngay sau khi nhận được đơn hàng
         </Body>
         <PaymentButton cart={cart} />
       </>

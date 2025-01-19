@@ -56,10 +56,10 @@ export function AddonsItem({region_id, variant = "PDP", ...product}: Props) {
           className={cx("self-end", {
             "mr-4": variant === "cart",
           })}
-          label="Add +"
+          label="Thêm vào giỏ"
           productVariant={variantWithProduct}
           regionId={region_id}
-          size={variant === "PDP" ? "md" : variant === "cart" ? "sm" : null}
+          size={variant === "PDP" ? "sm" : variant === "cart" ? "sm" : null}
           variant="outline"
         />
       </div>

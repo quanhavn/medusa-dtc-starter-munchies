@@ -12,7 +12,7 @@
     @apply font-sans;
   }
   :root {
-    @apply [--header-height:_89px] lg:[--header-height:_108px];
+    @apply [--header-height:_120px] lg:[--header-height:_108px];
     --max-width: 1440px;
     --min-width: 320px;
     /* colors */
@@ -31,7 +31,7 @@
   }
 
   .hero-asset {
-    min-height: min(590px, calc(100vh - var(--header-height) - 1rem));
+    min-height: min(500px, calc(70vh - var(--header-height) - 1rem));
   }
 
   .newletter-text:-webkit-autofill {

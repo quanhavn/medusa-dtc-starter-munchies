@@ -18,8 +18,8 @@ export default async function CollectionPage(props: CollectionPageProps) {
   return (
     <section className="mx-auto flex max-w-max-screen flex-col gap-10 px-m pb-10 pt-[3.5rem] lg:px-xl">
       <div>
-        <Heading desktopSize="2xl" font="serif" mobileSize="xl" tag="h1">
-          Tất cả sản phẩm
+        <Heading desktopSize="2xl" font="serif" mobileSize="sm" tag="h1">
+          Sản phẩm nhà Sun
         </Heading>
       </div>
       <div className="flex flex-col gap-6">

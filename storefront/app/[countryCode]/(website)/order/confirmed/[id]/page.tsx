@@ -116,10 +116,10 @@ export default async function OrderConfirmedPage(props: PageProps<"id">) {
             <Body className="font-medium" desktopSize="base" font="sans">
               {order.shipping_address?.address_1}
             </Body>
-            <Body className="font-medium" desktopSize="base" font="sans">
+            {/* <Body className="font-medium" desktopSize="base" font="sans">
               {order.shipping_address?.postal_code},{" "}
               {order.shipping_address?.city}
-            </Body>
+            </Body> */}
           </div>
           <div className="flex flex-1 flex-col gap-[6px]">
             <Body
@@ -130,7 +130,7 @@ export default async function OrderConfirmedPage(props: PageProps<"id">) {
               Liên hệ
             </Body>
             <Body className="font-medium" desktopSize="base" font="sans">
-              {order.email}
+              {order.shipping_address?.phone}
             </Body>
           </div>
 

@@ -94,7 +94,7 @@ export default function AddressForm({
             <Body className="font-semibold" font="sans">
               Liên hệ
             </Body>
-            <Body font="sans">Email: {cart.email}</Body>
+            {/* <Body font="sans">Email: {cart.email}</Body> */}
             <Body font="sans">SĐT: {cart.shipping_address?.phone}</Body>
           </div>
         </div>
@@ -122,12 +122,12 @@ export default function AddressForm({
               placeholder="Số điện thoại"
               required
             />  */}
-            <Input
+            {/* <Input
               defaultValue={cart.email}
               name="email"
               placeholder="Email"
               required
-            />
+            /> */}
           </div>
 
           {/* {!checked && (

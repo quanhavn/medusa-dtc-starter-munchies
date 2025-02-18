@@ -89,7 +89,7 @@ export async function setCheckoutAddresses(
 
     const data = {
       customer_id: customer?.id,
-      email: customer?.email || formData.get("email"),
+      email: customer?.email || formData.get("email") || "admin@bepnhasun.com",
       shipping_address: {
         address_1: formData.get("shipping_address.address_1"),
         address_2: "",

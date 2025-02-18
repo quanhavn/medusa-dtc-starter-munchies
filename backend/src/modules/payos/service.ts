@@ -185,37 +185,37 @@ class PayOsProviderService extends AbstractPaymentProvider<Options> {
   //     data,
   //     rawData,
   //     headers
-  //   } = payload
+  //   } = payload as {data: any, rawData: any, headers: any}
 
   //   try {
 
-  //     // console.log("Getting webhook action and data with payload: ", payload)
-  //     // console.log("Getting webhook action and data with data: ", data)
+  //     console.log("Getting webhook action and data with payload: ", payload)
+  //     console.log("Getting webhook action and data with data: ", data)
 
-  //     const data = {
-  //       code: '00',
-  //       desc: 'success',
-  //       success: true,
-  //       data: {
-  //         accountNumber: '8844043418',
-  //         amount: 6000,
-  //         description: 'CSU1ZPIH5Q7 JHNKY43AZ2NM65N1KRG0K3BZ',
-  //         reference: 'c60f5965-371e-4111-a237-9fc933f89af7',
-  //         transactionDateTime: '2025-01-16 01:35:13',
-  //         virtualAccountNumber: 'V3CAS8844043418',
-  //         counterAccountBankId: '',
-  //         counterAccountBankName: '',
-  //         counterAccountName: null,
-  //         counterAccountNumber: null,
-  //         virtualAccountName: '',
-  //         currency: 'VND',
-  //         orderCode: 82735,
-  //         paymentLinkId: 'a8893c40d2494c23b4cd7916f1488cf8',
-  //         code: '00',
-  //         desc: 'success'
-  //       },
-  //       signature: '52faeb2b7b80b4b4f6b68e141941c915e7f2ce64d9a835c8a0bff7cc6da44aa5'
-  //     }
+  //     // const data = {
+  //     //   code: '00',
+  //     //   desc: 'success',
+  //     //   success: true,
+  //     //   data: {
+  //     //     accountNumber: '8844043418',
+  //     //     amount: 6000,
+  //     //     description: 'CSU1ZPIH5Q7 JHNKY43AZ2NM65N1KRG0K3BZ',
+  //     //     reference: 'c60f5965-371e-4111-a237-9fc933f89af7',
+  //     //     transactionDateTime: '2025-01-16 01:35:13',
+  //     //     virtualAccountNumber: 'V3CAS8844043418',
+  //     //     counterAccountBankId: '',
+  //     //     counterAccountBankName: '',
+  //     //     counterAccountName: null,
+  //     //     counterAccountNumber: null,
+  //     //     virtualAccountName: '',
+  //     //     currency: 'VND',
+  //     //     orderCode: 82735,
+  //     //     paymentLinkId: 'a8893c40d2494c23b4cd7916f1488cf8',
+  //     //     code: '00',
+  //     //     desc: 'success'
+  //     //   },
+  //     //   signature: '52faeb2b7b80b4b4f6b68e141941c915e7f2ce64d9a835c8a0bff7cc6da44aa5'
+  //     // }
   //     const sessionId = `payses_01${data.data.description.split(" ").pop()}`
 
   //     // console.log(sessionId);

@@ -42,6 +42,7 @@ export default function Payment({
   const [, setCardComplete] = useState(false); 
   const [isOpen, setIsOpen] = useState(false);
   const [isPlacingOrder, setIsPlacingOrder] = useState(false);
+  const [isShowModalErrorPaymentChecking, setIsShowModalErrorPaymentChecking] = useState(false);
 
   const activeSession = cart.payment_collection?.payment_sessions?.find(
     (paymentSession: any) => paymentSession.status === "pending",
@@ -221,9 +222,29 @@ export default function Payment({
             <>
               <div className="w-full">
                 <div className="mb-4 text-sm">
+                  VUI LÒNG KHÔNG ĐÓNG TRÌNH DUYỆT HOẶC CHUYỂN SANG TRANG KHÁC
+                </div>
+                <div className="mb-4 text-sm">
                   Sau khi thực hiện thanh toán thành công, vui lòng đợi từ 5 - 10s để
                   hệ thống tự động cập nhật.
                 </div>
+                <button
+                  onClick={async () => {
+                    setIsPlacingOrder(true);
+                    try {
+                      const result:any = await placeOrder();
+                      console.log(result.payment_collection.payment_sessions[0].status);
+                      if (result.payment_collection.payment_sessions[0].status != "captured") {
+                        setIsShowModalErrorPaymentChecking(true);
+                      }
+                    } finally {
+                      setIsPlacingOrder(false);
+                    }
+                  }}
+                  className="w-full rounded-md bg-accent py-2 text-sm text-background hover:opacity-90"
+                >
+                  Nếu không tự cập nhập, vui lòng ấn vào đây
+                </button>
               </div>
               <div
                 className="h-[400px]"
@@ -264,6 +285,19 @@ export default function Payment({
           <div className="flex flex-col items-center gap-4 rounded-lg bg-white p-6">
             <div className="h-8 w-8 animate-spin rounded-full border-4 border-accent border-t-transparent"></div>
             <p className="text-sm">Đang xử lý đơn hàng...</p>
+          </div>
+        </div>
+      )}
+      {isShowModalErrorPaymentChecking && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="flex flex-col items-center gap-4 rounded-lg bg-white p-6">
+            <p className="text-sm">Đơn hàng chưa được thanh toán. Vui lòng thử lại sau hoặc liên hệ với shop</p>
+            <button 
+              onClick={() => setIsShowModalErrorPaymentChecking(false)}
+              className="mt-4 rounded-md bg-accent px-4 py-2 text-sm text-background hover:opacity-90"
+            >
+              Đóng
+            </button>
           </div>
         </div>
       )}
